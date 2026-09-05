@@ -5,16 +5,25 @@ import './Hero.css';
 
 const Hero = () => {
   const containerRef = useRef(null);
-  const { scrollY } = useScroll();
   
-  const y1 = useTransform(scrollY, [0, 1000], [0, 200]);
-  const y2 = useTransform(scrollY, [0, 1000], [0, -100]);
-  const opacity = useTransform(scrollY, [0, 500], [1, 0]);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"]
+  });
+  
+  // Cinematic Camera Pull-Back Mappings
+  const contentScale = useTransform(scrollYProgress, [0, 1], [1, 0.9]);
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
+  const contentY = useTransform(scrollYProgress, [0, 1], [0, -50]);
+  
+  // Depth Parallax
+  const visualY = useTransform(scrollYProgress, [0, 1], [0, 150]);
+  const bgLightY = useTransform(scrollYProgress, [0, 1], [0, 250]);
 
   return (
     <section className="hero-section" id="hero" ref={containerRef}>
-      <div className="ambient-light-blue" style={{ top: '10%', left: '20%' }}></div>
-      <div className="ambient-light-orange" style={{ bottom: '10%', right: '20%' }}></div>
+      <motion.div className="ambient-light-blue" style={{ top: '10%', left: '20%', y: bgLightY }}></motion.div>
+      <motion.div className="ambient-light-orange" style={{ bottom: '10%', right: '20%', y: visualY }}></motion.div>
 
       <div className="container hero-container">
         <motion.div 
@@ -22,7 +31,7 @@ const Hero = () => {
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 1, delay: 0.2 }}
-          style={{ y: y2, opacity }}
+          style={{ scale: contentScale, opacity: contentOpacity, y: contentY }}
         >
           <div className="status-indicator">
             <span className="status-dot"></span>
@@ -46,7 +55,7 @@ const Hero = () => {
 
         <motion.div 
           className="hero-visual"
-          style={{ y: y1 }}
+          style={{ y: visualY, opacity: contentOpacity }}
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1.5, delay: 0.5 }}
@@ -59,6 +68,7 @@ const Hero = () => {
         className="scroll-indicator"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
+        style={{ opacity: contentOpacity }}
         transition={{ delay: 2, duration: 1 }}
       >
         <div className="mouse">

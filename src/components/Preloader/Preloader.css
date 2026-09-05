@@ -1,0 +1,341 @@
+/* =========================================
+   BLAZEBYTE CINEMATIC 3D MOTION PRELOADER
+   ========================================= */
+
+.blazebyte-3d-preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  background-color: #020308;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  perspective: 1200px; /* Crucial for 3D depth */
+}
+
+/* 3D Master Container */
+.preloader-3d-scene {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  transform-style: preserve-3d;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* =========================================
+   LAYER 1: BACKGROUND (Deep Parallax)
+   ========================================= */
+.preloader-layer-bg {
+  position: absolute;
+  inset: -20%; /* Bleed edge to allow camera movement */
+  background: radial-gradient(ellipse at 50% 50%, rgba(10, 15, 30, 1) 0%, rgba(2, 3, 8, 1) 100%);
+  transform: translateZ(-500px) scale(1.5);
+  transform-style: preserve-3d;
+}
+
+.preloader-grid {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(rgba(0, 210, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 210, 255, 0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+  opacity: 0.6;
+  transform: rotateX(60deg) translateY(100px) translateZ(-200px);
+  animation: gridDrift 20s linear infinite;
+}
+
+@keyframes gridDrift {
+  0% { transform: rotateX(60deg) translateY(0px) translateZ(-200px); }
+  100% { transform: rotateX(60deg) translateY(60px) translateZ(-200px); }
+}
+
+/* =========================================
+   LAYER 2: MIDGROUND (Floating Data)
+   ========================================= */
+.preloader-layer-mid {
+  position: absolute;
+  inset: 0;
+  transform: translateZ(-200px);
+  pointer-events: none;
+  transform-style: preserve-3d;
+}
+
+.data-fragment {
+  position: absolute;
+  background: rgba(0, 210, 255, 0.15);
+  box-shadow: 0 0 15px rgba(0, 210, 255, 0.1);
+}
+
+.frag-1 { width: 120px; height: 1px; top: 25%; left: 15%; animation: fragFloat1 12s ease-in-out infinite alternate; }
+.frag-2 { width: 1px; height: 80px; top: 60%; right: 20%; animation: fragFloat2 15s ease-in-out infinite alternate; }
+.frag-3 { width: 40px; height: 40px; border: 1px solid rgba(0, 210, 255, 0.1); background: transparent; bottom: 20%; left: 30%; animation: fragFloat1 18s ease-in-out infinite alternate-reverse; }
+.frag-4 { width: 2px; height: 2px; background: var(--color-plasma-orange); top: 35%; right: 35%; box-shadow: 0 0 10px var(--color-plasma-orange); animation: fragFloat2 8s ease-in-out infinite alternate; }
+
+@keyframes fragFloat1 {
+  0% { transform: translate3d(0, 0, 0) rotateZ(0deg); opacity: 0.2; }
+  100% { transform: translate3d(30px, -20px, 50px) rotateZ(5deg); opacity: 0.6; }
+}
+
+@keyframes fragFloat2 {
+  0% { transform: translate3d(0, 0, 0); opacity: 0.2; }
+  100% { transform: translate3d(-20px, 40px, 100px); opacity: 0.8; }
+}
+
+/* =========================================
+   LAYER 3: FOREGROUND (Interface)
+   ========================================= */
+.preloader-layer-fg {
+  position: absolute;
+  transform: translateZ(0px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.preloader-interface {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 420px;
+  padding: 0 24px;
+  /* Ambient 3D Hover */
+  animation: ambientInterfaceHover 8s ease-in-out infinite alternate;
+  transform-style: preserve-3d;
+}
+
+@keyframes ambientInterfaceHover {
+  0% { transform: rotateX(2deg) rotateY(-2deg) translateZ(0px); }
+  100% { transform: rotateX(-2deg) rotateY(2deg) translateZ(20px); }
+}
+
+/* -----------------------------------------
+   LOGO COMPONENT
+   ----------------------------------------- */
+.preloader-brand-container {
+  margin-bottom: 45px;
+  transform-style: preserve-3d;
+}
+
+.preloader-logo-wrapper {
+  position: relative;
+  width: fit-content;
+  margin: 0 auto;
+  border-radius: 4px;
+  overflow: hidden;
+  transform-style: preserve-3d;
+}
+
+.preloader-logo-3d {
+  width: 200px;
+  height: auto;
+  object-fit: contain;
+  position: relative;
+  z-index: 2;
+  mix-blend-mode: screen; /* Integrates black background better */
+}
+
+.preloader-logo-glow-3d {
+  position: absolute;
+  inset: -15px;
+  background: radial-gradient(circle, rgba(0, 210, 255, 0.25) 0%, transparent 65%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Scanline */
+.preloader-scanline-3d {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(0, 210, 255, 0.4), transparent);
+  z-index: 3;
+  pointer-events: none;
+  animation: scanlineOnce 1.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+  animation-delay: 0.6s;
+}
+
+/* Plasma Orange Streak */
+.preloader-energy-streak {
+  position: absolute;
+  top: 50%;
+  left: -50%;
+  width: 50%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--color-plasma-orange), transparent);
+  box-shadow: 0 0 15px var(--color-plasma-orange);
+  z-index: 4;
+  pointer-events: none;
+  animation: streakOnce 1.2s cubic-bezier(0.76, 0, 0.24, 1) forwards;
+  animation-delay: 1.5s;
+}
+
+@keyframes scanlineOnce { 0% { left: -100%; } 100% { left: 200%; } }
+@keyframes streakOnce { 0% { left: -50%; opacity: 0; } 50% { opacity: 1; } 100% { left: 150%; opacity: 0; } }
+
+/* -----------------------------------------
+   TYPOGRAPHY (Blur-to-Focus)
+   ----------------------------------------- */
+.preloader-status-container-3d {
+  height: 28px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 30px;
+  width: 100%;
+  position: relative;
+}
+
+.preloader-status-text-3d {
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-align: center;
+  white-space: nowrap;
+  position: absolute;
+  text-transform: uppercase;
+}
+
+.preloader-status-text-3d.final-phase {
+  color: var(--color-electric-blue);
+  text-shadow: 0 0 12px rgba(0, 210, 255, 0.5);
+}
+
+/* -----------------------------------------
+   TRANSMISSION LINE
+   ----------------------------------------- */
+.preloader-transmission-track-3d {
+  width: 100%;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.03);
+  position: relative;
+  margin-bottom: 28px;
+  border-radius: 2px;
+}
+
+.preloader-transmission-glow {
+  position: absolute;
+  inset: -5px;
+  background: var(--color-electric-blue);
+  filter: blur(8px);
+  opacity: 0.15;
+}
+
+.preloader-transmission-fill-3d {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(90deg, rgba(0, 210, 255, 0.2), var(--color-electric-blue));
+  transform-origin: left;
+  transform: scaleX(0);
+  animation: transmissionFill3D 3.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.preloader-transmission-pulse {
+  position: absolute;
+  top: -2px;
+  left: 0;
+  width: 6px;
+  height: 6px;
+  background-color: var(--color-plasma-orange);
+  border-radius: 50%;
+  box-shadow: 0 0 15px var(--color-plasma-orange), 0 0 5px #fff;
+  animation: transmissionPulseTravel 3.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes transmissionFill3D {
+  0% { transform: scaleX(0); }
+  100% { transform: scaleX(1); }
+}
+
+@keyframes transmissionPulseTravel {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(calc(372px - 6px)); } /* 420px - 48px padding = 372px */
+}
+
+/* -----------------------------------------
+   FINAL SYSTEM STATUS
+   ----------------------------------------- */
+.preloader-final-indicator-3d {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-heading);
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  color: var(--text-primary);
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+/* =========================================
+   REDUCED MOTION
+   ========================================= */
+@media (prefers-reduced-motion: reduce) {
+  .preloader-interface { animation: none; transform: none; }
+  .preloader-grid { animation: none; opacity: 0.2; }
+  .frag-1, .frag-2, .frag-3, .frag-4 { animation: none; display: none; }
+  .preloader-scanline-3d, .preloader-energy-streak { display: none; }
+  .preloader-transmission-fill-3d { animation: none; transform: scaleX(1); background: rgba(0, 210, 255, 0.5); }
+  .preloader-transmission-pulse { display: none; }
+}
+
+/* =========================================
+   MOBILE RESPONSIVENESS
+   ========================================= */
+@media (max-width: 480px) {
+  .preloader-interface {
+    max-width: 320px;
+  }
+  
+  .preloader-logo-3d {
+    width: 160px;
+  }
+  
+  .preloader-status-text-3d {
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+  }
+
+  .preloader-status-text-3d.final-phase {
+    letter-spacing: 0.15em;
+  }
+  
+  @keyframes transmissionPulseTravel {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(calc(272px - 6px)); } /* 320px - 48px = 272px */
+  }
+}
+
+@media (max-width: 375px) {
+  .preloader-interface {
+    max-width: 280px;
+  }
+  
+  .preloader-logo-3d {
+    width: 140px;
+  }
+  
+  .preloader-status-text-3d {
+    font-size: 0.55rem;
+    letter-spacing: 0.1em;
+  }
+
+  .preloader-status-text-3d.final-phase {
+    letter-spacing: 0.1em;
+  }
+  
+  @keyframes transmissionPulseTravel {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(calc(232px - 6px)); } /* 280px - 48px = 232px */
+  }
+}

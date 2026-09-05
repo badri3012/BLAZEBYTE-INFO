@@ -123,10 +123,10 @@ const CapabilityCard = ({ module, delay, isFeatured }) => {
     <motion.div
       ref={cardRef}
       className={`capability-module ${isFeatured ? 'featured-capability' : 'standard-capability'}`}
-      initial={{ opacity: 0, y: 40 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      initial={{ opacity: 0, y: 40, scale: 0.95, filter: 'blur(10px)' }}
+      whileInView={{ opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' }}
       viewport={{ once: true, margin: "-50px" }}
-      transition={{ duration: 0.6, delay }}
+      transition={{ duration: 0.8, delay, ease: "easeOut" }}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       animate={{ rotateX, rotateY, transformPerspective: 1000 }}

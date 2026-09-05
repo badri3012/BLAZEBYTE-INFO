@@ -77,9 +77,10 @@ const Contact = () => {
       <div className="container contact-container">
         <motion.div 
           className="contact-header"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: 30, filter: 'blur(10px)' }}
+          whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
           viewport={{ once: true }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
         >
           <h2 className="subheading">05 // INITIATE</h2>
           <h3 className="section-title">TRANSMIT A <span className="text-gradient">MESSAGE.</span></h3>
@@ -90,10 +91,10 @@ const Contact = () => {
 
         <motion.div 
           className="contact-form-wrapper glass-panel"
-          initial={{ opacity: 0, scale: 0.95 }}
-          whileInView={{ opacity: 1, scale: 1 }}
+          initial={{ opacity: 0, scale: 0.95, filter: 'blur(10px)' }}
+          whileInView={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.2 }}
+          transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
         >
           <div className="form-header">
             <div className="terminal-icon">

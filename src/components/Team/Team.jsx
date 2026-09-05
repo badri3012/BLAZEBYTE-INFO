@@ -9,10 +9,10 @@ const TeamCard = ({ member, delay }) => {
   return (
     <motion.div 
       className={`team-card ${isFounder ? 'founder-card' : ''}`}
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      initial={{ opacity: 0, y: 30, scale: 0.95, filter: 'blur(10px)' }}
+      whileInView={{ opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' }}
       viewport={{ once: true, margin: "-50px" }}
-      transition={{ duration: 0.6, delay }}
+      transition={{ duration: 0.8, delay, ease: "easeOut" }}
     >
       <div className="id-badge">
         <div className="badge-header">
@@ -107,10 +107,22 @@ const Team = () => {
     <section className="team-section section-padding" id="team">
       <div className="container">
         <div className="section-header">
-          <div className="section-badge">
+          <motion.div 
+            className="section-badge"
+            initial={{ opacity: 0, y: 20, filter: 'blur(5px)' }}
+            whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+          >
             <span className="status-dot-small"></span> BLAZEBYTE STUDIO // CORE TEAM DATABASE
-          </div>
-          <h2 className="section-title">THE <span className="title-accent">COLLECTIVE</span></h2>
+          </motion.div>
+          <motion.h2 
+            className="section-title"
+            initial={{ opacity: 0, y: 20, filter: 'blur(8px)' }}
+            whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1, duration: 0.6, ease: "easeOut" }}
+          >THE <span className="title-accent">COLLECTIVE</span></motion.h2>
         </div>
         
         <div className="team-grid">

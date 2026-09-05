@@ -34,8 +34,8 @@ const About = () => {
         <div className="section-header-center">
           <motion.div 
             className="section-badge"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: 20, filter: 'blur(5px)' }}
+            whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
             viewport={{ once: true }}
           >
             <span className="status-dot-small"></span> ORIGIN // MISSION // FUTURE
@@ -45,10 +45,10 @@ const About = () => {
         {/* Mission Statement */}
         <motion.div 
           className="mission-module"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: 30, filter: 'blur(10px)' }}
+          whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
           viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
         >
           <h2 className="cinematic-heading">
             WE DON'T JUST BUILD WEBSITES.<br/>
@@ -89,10 +89,10 @@ const About = () => {
                 </linearGradient>
               </defs>
               {/* Radial Lines connecting center (500, 300) to nodes */}
-              <motion.path d="M 300,150 L 500,300" className="radial-line" initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} transition={{ duration: 1, delay: 0.2 }} />
-              <motion.path d="M 700,150 L 500,300" className="radial-line" initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} transition={{ duration: 1, delay: 0.4 }} />
-              <motion.path d="M 300,450 L 500,300" className="radial-line" initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} transition={{ duration: 1, delay: 0.6 }} />
-              <motion.path d="M 700,450 L 500,300" className="radial-line" initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} transition={{ duration: 1, delay: 0.8 }} />
+              <motion.path d="M 300,150 L 500,300" className="radial-line" initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} transition={{ duration: 1.2, delay: 0.2, ease: "circOut" }} viewport={{ once: true }} />
+              <motion.path d="M 700,150 L 500,300" className="radial-line" initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} transition={{ duration: 1.2, delay: 0.4, ease: "circOut" }} viewport={{ once: true }} />
+              <motion.path d="M 300,450 L 500,300" className="radial-line" initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} transition={{ duration: 1.2, delay: 0.6, ease: "circOut" }} viewport={{ once: true }} />
+              <motion.path d="M 700,450 L 500,300" className="radial-line" initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} transition={{ duration: 1.2, delay: 0.8, ease: "circOut" }} viewport={{ once: true }} />
               
               {/* Animated Data Particles */}
               <circle r="3" className="data-particle dp-1" />
@@ -105,14 +105,14 @@ const About = () => {
           {/* Central Core */}
           <div className="blazebyte-core-wrapper">
             {/* Mobile Vertical Connection Line (Top) */}
-            {isMobile && <div className="mobile-connector-line core-out"></div>}
+            {isMobile && <motion.div className="mobile-connector-line core-out" initial={{ scaleY: 0 }} whileInView={{ scaleY: 1 }} viewport={{ once: true }} transition={{ duration: 0.6, ease: "easeOut" }} style={{ transformOrigin: "top" }}></motion.div>}
             
             <motion.div 
               className="blazebyte-core"
-              initial={{ scale: 0.8, opacity: 0 }}
-              whileInView={{ scale: 1, opacity: 1 }}
+              initial={{ scale: 0.8, opacity: 0, filter: 'blur(10px)' }}
+              whileInView={{ scale: 1, opacity: 1, filter: 'blur(0px)' }}
               viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
             >
               <div className="core-rings">
                 <div className="ring ring-1"></div>
@@ -133,10 +133,10 @@ const About = () => {
               <React.Fragment key={node.id}>
                 <motion.div 
                   className={`system-node node-${node.id}`}
-                  initial={{ opacity: 0, scale: 0.8, y: 20 }}
-                  whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                  initial={{ opacity: 0, scale: 0.8, y: 20, filter: 'blur(8px)' }}
+                  whileInView={{ opacity: 1, scale: 1, y: 0, filter: 'blur(0px)' }}
                   viewport={{ once: true, margin: "-50px" }}
-                  transition={{ duration: 0.6, delay: node.delay }}
+                  transition={{ duration: 0.6, delay: node.delay, ease: "easeOut" }}
                 >
                   <div className="node-icon-wrapper">
                     <node.icon size={24} className="node-icon" />
@@ -148,7 +148,7 @@ const About = () => {
                   </div>
                 </motion.div>
                 {/* Mobile Vertical Connection Line (Between Nodes) */}
-                {isMobile && i < nodes.length - 1 && <div className="mobile-connector-line"></div>}
+                {isMobile && i < nodes.length - 1 && <motion.div className="mobile-connector-line" initial={{ scaleY: 0 }} whileInView={{ scaleY: 1 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: node.delay, ease: "easeOut" }} style={{ transformOrigin: "top" }}></motion.div>}
               </React.Fragment>
             ))}
           </div>
@@ -161,10 +161,10 @@ const About = () => {
             <motion.div 
               key={i}
               className="value-micro-module glass-panel"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, y: 30, filter: 'blur(8px)' }}
+              whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.2 }}
+              transition={{ duration: 0.6, delay: i * 0.2, ease: "easeOut" }}
             >
               <div className="value-indicator"></div>
               <div className="value-content">

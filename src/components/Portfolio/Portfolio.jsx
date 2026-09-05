@@ -101,10 +101,10 @@ const InteractiveFeaturedCard = ({ project }) => {
   return (
     <motion.div 
       className="featured-project-module interactive-wrapper"
-      initial={{ opacity: 0, y: 40 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.6 }}
+      initial={{ opacity: 0, y: 40, scale: 0.95, filter: 'blur(10px)' }}
+      whileInView={{ opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' }}
+      viewport={{ once: true, margin: "-50px" }}
+      transition={{ duration: 0.8, ease: "easeOut" }}
       style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
       onMouseMove={handleMouseMove}
       onMouseEnter={() => setIsHovered(true)}
@@ -172,10 +172,10 @@ const InteractiveArchiveCard = ({ project, index, yTransform, onSelect }) => {
     <motion.div 
       className={`archive-module-wrapper ${index % 2 === 0 ? 'offset-down' : ''}`}
       style={{ y: yTransform }}
-      initial={{ opacity: 0, scale: 0.95 }}
-      whileInView={{ opacity: 1, scale: 1 }}
+      initial={{ opacity: 0, scale: 0.9, filter: 'blur(10px)' }}
+      whileInView={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
       viewport={{ once: true, margin: "-100px" }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
+      transition={{ duration: 0.8, delay: index * 0.1, ease: "easeOut" }}
     >
       <motion.div
         className="archive-module interactive-wrapper clickable"
@@ -352,18 +352,18 @@ const Portfolio = () => {
         <div className="portfolio-header">
           <motion.div 
             className="section-badge"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: 20, filter: 'blur(5px)' }}
+            whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
             viewport={{ once: true }}
           >
             <span className="status-dot-small"></span> BLAZEBYTE // DIGITAL ARCHIVES
           </motion.div>
           <motion.h2 
             className="section-title"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: 20, filter: 'blur(8px)' }}
+            whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
             viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
+            transition={{ delay: 0.1, duration: 0.6, ease: "easeOut" }}
           >
             SELECTED WORK <span className="title-accent">// PROJECT ARCHIVE</span>
           </motion.h2>
