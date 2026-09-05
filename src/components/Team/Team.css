@@ -1,0 +1,248 @@
+.team-section {
+  position: relative;
+  z-index: 10;
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 32px;
+}
+
+.team-card {
+  perspective: 1000px;
+}
+
+.id-badge {
+  background: rgba(10, 15, 30, 0.7);
+  border: 1px solid rgba(0, 210, 255, 0.2);
+  border-radius: 12px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+}
+
+.id-badge::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0) 50%);
+  pointer-events: none;
+}
+
+.id-badge:hover {
+  transform: translateY(-10px) rotateX(5deg) rotateY(-5deg);
+  box-shadow: 20px 20px 40px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 210, 255, 0.2);
+  border-color: rgba(0, 210, 255, 0.5);
+}
+
+.badge-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 12px;
+}
+
+.badge-logo {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  color: var(--text-muted);
+  letter-spacing: 0.1em;
+}
+
+.badge-status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: monospace;
+  font-size: 0.75rem;
+  color: #27c93f;
+}
+
+.badge-status .status-dot {
+  width: 6px;
+  height: 6px;
+  background-color: #27c93f;
+  border-radius: 50%;
+  box-shadow: 0 0 5px #27c93f;
+}
+
+.badge-profile {
+  display: flex;
+  gap: 20px;
+  align-items: stretch;
+}
+
+.profile-image-container {
+  width: 90px;
+  height: 110px;
+  border: 1px solid var(--border-glow);
+  background: rgba(0, 210, 255, 0.05);
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.placeholder-icon {
+  color: var(--color-electric-blue);
+  opacity: 0.5;
+}
+
+.scanner-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--color-electric-blue);
+  box-shadow: 0 0 10px var(--color-electric-blue);
+  animation: scan 3s infinite linear;
+  opacity: 0.7;
+}
+
+@keyframes scan {
+  0% { top: 0; opacity: 0; }
+  10% { opacity: 0.7; }
+  90% { opacity: 0.7; }
+  100% { top: 100%; opacity: 0; }
+}
+
+.profile-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.member-name {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.member-role {
+  font-family: var(--font-subheading);
+  font-size: 0.75rem;
+  color: var(--color-plasma-orange);
+  letter-spacing: 0.1em;
+  margin-bottom: 16px;
+}
+
+.member-data {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: auto;
+}
+
+.data-row {
+  display: flex;
+  justify-content: space-between;
+  font-family: monospace;
+  font-size: 0.8rem;
+}
+
+.data-label {
+  color: var(--text-muted);
+}
+
+.data-value {
+  color: var(--color-electric-blue);
+}
+
+.badge-skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.skill-tag {
+  font-family: var(--font-subheading);
+  font-size: 0.65rem;
+  padding: 4px 8px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+  color: var(--text-secondary);
+  letter-spacing: 0.05em;
+}
+
+.badge-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 12px;
+  margin-top: auto;
+}
+
+.activity-icon {
+  color: var(--color-electric-blue);
+  opacity: 0.5;
+}
+
+.barcode {
+  font-family: 'Impact', sans-serif;
+  font-size: 1.2rem;
+  color: var(--text-muted);
+  opacity: 0.5;
+  letter-spacing: 2px;
+  transform: scaleY(1.5);
+  transform-origin: bottom;
+}
+
+/* =========================================
+   ADDITIONS FOR REAL PERSONNEL DATA
+   ========================================= */
+
+.badge-description {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin-top: 4px;
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
+  padding-left: 12px;
+}
+
+/* Founder Priority Styling */
+.founder-card .id-badge {
+  border-color: rgba(255, 75, 31, 0.3); /* Subtle plasma orange border */
+  background: linear-gradient(135deg, rgba(10, 15, 30, 0.8), rgba(20, 10, 15, 0.7));
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(0, 210, 255, 0.05);
+}
+
+.founder-card .id-badge:hover {
+  border-color: rgba(255, 75, 31, 0.6);
+  box-shadow: 20px 20px 50px rgba(0, 0, 0, 0.6), 0 0 30px rgba(255, 75, 31, 0.2);
+}
+
+.founder-label {
+  font-family: var(--font-heading);
+  font-size: 0.6rem;
+  color: #fff;
+  background: var(--color-plasma-orange);
+  padding: 4px 10px;
+  border-radius: 20px;
+  letter-spacing: 0.1em;
+  margin-right: 8px;
+  box-shadow: 0 0 10px rgba(255, 75, 31, 0.3);
+}
+
+.founder-card .scanner-line {
+  background: var(--color-plasma-orange);
+  box-shadow: 0 0 10px var(--color-plasma-orange);
+}

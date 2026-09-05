@@ -1,0 +1,590 @@
+/* =========================================
+   PORTFOLIO - PROJECT ARCHIVE
+   ========================================= */
+.portfolio-section {
+  padding: 120px 0;
+  position: relative;
+  background: radial-gradient(circle at 50% 0%, rgba(0, 210, 255, 0.03) 0%, transparent 60%);
+}
+
+.portfolio-container {
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+}
+
+.portfolio-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.section-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-heading);
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  letter-spacing: 0.2em;
+  margin-bottom: 16px;
+  background: rgba(255, 255, 255, 0.03);
+  padding: 6px 16px;
+  border-radius: 40px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.section-title {
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+}
+
+.title-accent {
+  color: var(--color-electric-blue);
+  font-weight: 300;
+}
+
+/* =========================================
+   FEATURED TRANSMISSION (01)
+   ========================================= */
+.featured-transmission {
+  width: 100%;
+  perspective: 1000px;
+}
+
+.featured-project-module {
+  background: rgba(10, 15, 30, 0.4);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-left: 3px solid var(--color-plasma-orange);
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(255, 75, 31, 0.05);
+  will-change: transform;
+}
+
+.transmission-label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: var(--color-plasma-orange);
+  color: #fff;
+  font-family: var(--font-heading);
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  padding: 6px 20px;
+  border-bottom-right-radius: 12px;
+  z-index: 10;
+  box-shadow: 0 5px 15px rgba(255, 75, 31, 0.3);
+}
+
+.featured-content-wrapper {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+}
+
+.featured-image-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 400px;
+  overflow: hidden;
+}
+
+.featured-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1), filter 0.8s ease;
+}
+
+.featured-project-module:hover .featured-image {
+  transform: scale(1.04);
+  filter: contrast(1.05) brightness(1.1);
+}
+
+.glass-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, transparent, rgba(10, 15, 30, 0.9));
+  pointer-events: none;
+  transition: box-shadow 0.4s ease;
+}
+
+.featured-project-module:hover .glow-edge {
+  box-shadow: inset 0 0 30px rgba(0, 210, 255, 0.2);
+}
+
+.featured-metadata {
+  padding: 60px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  z-index: 5;
+}
+
+.project-category {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: monospace;
+  font-size: 0.75rem;
+  color: var(--color-electric-blue);
+  margin-bottom: 16px;
+}
+
+.project-title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 24px;
+}
+
+.project-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+.tag {
+  font-family: monospace;
+  font-size: 0.65rem;
+  padding: 6px 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  color: var(--text-secondary);
+}
+
+.mt-4 {
+  margin-top: auto;
+  align-self: flex-start;
+}
+
+/* =========================================
+   ASYMMETRIC ARCHIVE GRID (02-06)
+   ========================================= */
+.archive-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 40px;
+  margin-top: 40px;
+  padding-bottom: 100px; /* Space for parallax scrolling */
+}
+
+/* Offset every other item to create the masonry/asymmetric feel */
+.offset-down {
+  margin-top: 80px;
+}
+
+.archive-module-wrapper {
+  perspective: 1000px;
+}
+
+.archive-module {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: relative;
+  will-change: transform;
+}
+
+.archive-module.clickable {
+  cursor: pointer;
+}
+
+.archive-image-container {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+  transition: border-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+.archive-module:hover .archive-image-container {
+  border-color: rgba(0, 210, 255, 0.4);
+  box-shadow: 0 25px 60px rgba(0, 210, 255, 0.2);
+}
+
+.archive-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1), filter 0.8s ease;
+}
+
+.archive-module:hover .zoom-fx {
+  transform: scale(1.05);
+  filter: contrast(1.1) brightness(1.1);
+}
+
+.archive-glass-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(10, 15, 30, 0.8), transparent 50%);
+  opacity: 0.6;
+  transition: opacity 0.4s ease, box-shadow 0.4s ease;
+}
+
+.archive-module:hover .archive-glass-overlay {
+  opacity: 0.2;
+}
+
+.archive-module:hover .glow-edge {
+  box-shadow: inset 0 0 40px rgba(0, 210, 255, 0.3);
+}
+
+.archive-hover-meta {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  z-index: 10;
+}
+
+.btn-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--color-electric-blue);
+  color: #fff;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  box-shadow: 0 0 20px rgba(0, 210, 255, 0.4);
+}
+
+.archive-metadata {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 0 10px;
+}
+
+.project-title-small {
+  font-size: 1.4rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.project-tags-compact {
+  font-family: monospace;
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+}
+
+/* =========================================
+   INTERACTIVE FX
+   ========================================= */
+.scan-line {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.15), transparent);
+  transform: skewX(-20deg);
+  z-index: 20;
+  pointer-events: none;
+}
+
+.scan-line.active {
+  animation: scanSweep 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+@keyframes scanSweep {
+  0% { left: -100%; }
+  100% { left: 200%; }
+}
+
+/* =========================================
+   RESPONSIVE LAYOUT
+   ========================================= */
+@media (max-width: 992px) {
+  .featured-content-wrapper {
+    grid-template-columns: 1fr;
+  }
+  
+  .glass-overlay {
+    background: linear-gradient(to top, rgba(10, 15, 30, 1), transparent);
+  }
+  
+  .featured-metadata {
+    padding: 30px;
+    margin-top: -60px;
+  }
+
+  .archive-grid {
+    grid-template-columns: 1fr;
+    gap: 60px;
+  }
+
+  .offset-down {
+    margin-top: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .portfolio-section {
+    padding: 80px 0;
+  }
+  
+  .section-title {
+    font-size: 2rem;
+  }
+
+  .project-title {
+    font-size: 1.6rem;
+  }
+  
+  .featured-image-container {
+    min-height: 250px;
+  }
+}
+
+/* =========================================
+   PROJECT DETAILS MODAL
+   ========================================= */
+.project-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(5, 8, 20, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+}
+
+.project-modal-content {
+  width: 100%;
+  max-width: 900px;
+  max-height: 90vh;
+  overflow-y: auto;
+  background: rgba(10, 15, 30, 0.7);
+  border: 1px solid rgba(0, 210, 255, 0.15);
+  border-radius: 16px;
+  box-shadow: 0 30px 100px rgba(0, 0, 0, 0.7), inset 0 0 40px rgba(0, 210, 255, 0.05);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-primary);
+  font-family: var(--font-heading);
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  padding: 8px 16px;
+  border-radius: 40px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  z-index: 20;
+  transition: all 0.3s ease;
+}
+
+.modal-close-btn:hover {
+  background: rgba(255, 75, 31, 0.1);
+  border-color: rgba(255, 75, 31, 0.4);
+  color: var(--color-plasma-orange);
+}
+
+.modal-header {
+  padding: 24px 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.modal-transmission-id {
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  color: var(--color-electric-blue);
+  letter-spacing: 0.15em;
+}
+
+.modal-status {
+  font-family: monospace;
+  font-size: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text-secondary);
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+.status-dot.green { background: #00ff88; box-shadow: 0 0 10px #00ff88; }
+.status-dot.blue { background: #00d2ff; box-shadow: 0 0 10px #00d2ff; }
+.status-dot.orange { background: #ff4b1f; box-shadow: 0 0 10px #ff4b1f; }
+
+.modal-hero {
+  width: 100%;
+  height: 350px;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.modal-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.modal-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(10, 15, 30, 1) 0%, transparent 60%);
+}
+
+.modal-body {
+  padding: 40px 40px;
+}
+
+.modal-title-area {
+  margin-bottom: 40px;
+}
+
+.modal-category {
+  font-family: monospace;
+  font-size: 0.85rem;
+  color: var(--color-plasma-orange);
+  margin-bottom: 12px;
+}
+
+.modal-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.modal-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 60px;
+}
+
+.modal-subheading {
+  font-family: var(--font-heading);
+  font-size: 0.9rem;
+  color: var(--color-electric-blue);
+  letter-spacing: 0.1em;
+  margin-bottom: 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 8px;
+}
+
+.modal-overview-text {
+  color: var(--text-secondary);
+  line-height: 1.8;
+  font-size: 1.05rem;
+}
+
+.modal-services-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.modal-services-list li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--text-primary);
+}
+
+.list-icon {
+  color: var(--color-electric-blue);
+}
+
+.mt-6 {
+  margin-top: 32px;
+}
+
+.modal-footer {
+  margin-top: 50px;
+  display: flex;
+  justify-content: flex-start;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding-top: 30px;
+}
+
+/* Modal Scrollbar */
+.project-modal-content::-webkit-scrollbar {
+  width: 6px;
+}
+.project-modal-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+.project-modal-content::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+}
+
+@media (max-width: 992px) {
+  .modal-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .project-modal-backdrop {
+    padding: 24px 16px;
+  }
+  .project-modal-content {
+    max-height: 100%;
+    height: 100%;
+    border-radius: 16px;
+    border: 1px solid rgba(0, 210, 255, 0.2);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), inset 0 0 20px rgba(0, 210, 255, 0.05);
+  }
+  .modal-close-btn {
+    top: 16px;
+    right: 16px;
+    padding: 6px 12px;
+    font-size: 0.6rem;
+  }
+  .modal-hero {
+    height: 200px;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+  }
+  .modal-body {
+    padding: 30px 20px;
+  }
+  .modal-title {
+    font-size: 1.8rem;
+  }
+}

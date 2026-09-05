@@ -1,0 +1,417 @@
+/* =========================================
+   ABOUT (BLAZEBYTE CORE TRANSMISSION)
+   ========================================= */
+
+.about-section {
+  position: relative;
+  z-index: 10;
+  padding: 120px 0;
+  overflow: hidden;
+}
+
+.about-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.section-header-center {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 40px;
+}
+
+/* =========================================
+   MISSION MODULE
+   ========================================= */
+.mission-module {
+  width: 100%;
+  max-width: 1000px;
+  text-align: center;
+  margin-bottom: 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.cinematic-heading {
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  line-height: 1.1;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+}
+
+.mission-content-wrapper {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 40px;
+  text-align: left;
+}
+
+.mission-text-col {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+.our-mission-box {
+  padding: 30px;
+  border-radius: 12px;
+  border: 1px solid rgba(0, 210, 255, 0.2);
+  background: rgba(10, 15, 30, 0.5);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.om-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 15px;
+}
+
+.om-title {
+  font-family: var(--font-heading);
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+  color: var(--color-electric-blue);
+  margin-left: 5px;
+}
+
+.our-mission-box p {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #fff;
+}
+
+
+/* =========================================
+   HOLOGRAPHIC ECOSYSTEM TRANSMISSION
+   ========================================= */
+.ecosystem-transmission {
+  position: relative;
+  width: 100%;
+  max-width: 1000px;
+  height: 600px;
+  margin: 0 auto 80px;
+}
+
+.desktop-connections {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.radial-line {
+  fill: none;
+  stroke: url(#lineGrad);
+  stroke-width: 2;
+  stroke-dasharray: 6;
+  animation: line-flow 20s linear infinite;
+}
+
+@keyframes line-flow {
+  from { stroke-dashoffset: 1000; }
+  to { stroke-dashoffset: 0; }
+}
+
+.data-particle {
+  fill: var(--color-plasma-orange);
+  filter: drop-shadow(0 0 5px var(--color-plasma-orange));
+}
+
+.dp-1 { offset-path: path("M 300,150 L 500,300"); animation: particle-travel 4s linear infinite; }
+.dp-2 { offset-path: path("M 700,150 L 500,300"); animation: particle-travel 5s linear infinite 1s; }
+.dp-3 { offset-path: path("M 300,450 L 500,300"); animation: particle-travel 6s linear infinite 0.5s; }
+.dp-4 { offset-path: path("M 700,450 L 500,300"); animation: particle-travel 4.5s linear infinite 2s; }
+
+@keyframes particle-travel {
+  0% { offset-distance: 0%; opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { offset-distance: 100%; opacity: 0; }
+}
+
+
+/* =========================================
+   BLAZEBYTE CORE
+   ========================================= */
+.blazebyte-core-wrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.blazebyte-core {
+  position: relative;
+  width: 180px;
+  height: 180px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.core-rings {
+  position: absolute;
+  inset: -40px;
+  pointer-events: none;
+}
+
+.ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 210, 255, 0.2);
+}
+
+.ring-1 { animation: slow-spin 20s linear infinite; border-top-color: var(--color-electric-blue); border-bottom-color: transparent; }
+.ring-2 { inset: 10px; animation: slow-spin 30s linear infinite reverse; border-right-color: var(--color-plasma-orange); border-left-color: transparent; }
+.ring-3 { inset: 20px; border: 1px dashed rgba(255, 255, 255, 0.1); animation: slow-spin 40s linear infinite; }
+
+@keyframes slow-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.core-logo-container {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  border-radius: 16px;
+  overflow: hidden;
+  background: rgba(10, 15, 30, 0.8);
+  border: 1px solid rgba(0, 210, 255, 0.3);
+  box-shadow: 0 0 30px rgba(0, 210, 255, 0.2), inset 0 0 20px rgba(0, 210, 255, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+
+.core-logo {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* Exact aspect ratio */
+  position: relative;
+  z-index: 2;
+}
+
+.core-glow-overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(0, 210, 255, 0.2) 0%, transparent 70%);
+  z-index: 3;
+  pointer-events: none;
+}
+
+.core-label {
+  position: absolute;
+  bottom: -30px;
+  font-family: var(--font-heading);
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  color: var(--color-electric-blue);
+  background: rgba(0, 0, 0, 0.5);
+  padding: 4px 12px;
+  border-radius: 20px;
+  border: 1px solid rgba(0, 210, 255, 0.2);
+}
+
+
+/* =========================================
+   SYSTEM NODES
+   ========================================= */
+.nodes-container {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.system-node {
+  position: absolute;
+  background: rgba(10, 15, 30, 0.7);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 15px 20px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  min-width: 220px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  pointer-events: auto;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.system-node:hover {
+  border-color: rgba(0, 210, 255, 0.4);
+  box-shadow: 0 10px 30px rgba(0, 210, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+.node-icon-wrapper {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  color: var(--color-electric-blue);
+}
+
+.icon-glow {
+  position: absolute;
+  inset: 0;
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(0, 210, 255, 0.3);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.system-node:hover .icon-glow { opacity: 1; }
+
+.node-text { display: flex; flex-direction: column; gap: 4px; }
+.node-text h4 { font-family: var(--font-heading); font-size: 0.9rem; margin: 0; color: #fff; letter-spacing: 0.05em; }
+.node-text span { font-size: 0.65rem; color: var(--text-muted); font-family: monospace; letter-spacing: 0.05em; }
+
+/* Node Positioning (Desktop Radial) */
+.node-creative { top: 120px; left: 160px; transform: translate(-50%, -50%); }
+.node-build { top: 120px; right: -60px; transform: translate(-50%, -50%); }
+.node-automate { bottom: 90px; left: 160px; transform: translate(-50%, -50%); }
+.node-grow { bottom: 90px; right: -60px; transform: translate(-50%, -50%); }
+
+
+/* =========================================
+   COMPANY VALUES MICRO-MODULES
+   ========================================= */
+.values-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  width: 100%;
+  max-width: 1000px;
+}
+
+.value-micro-module {
+  padding: 24px;
+  border-radius: 8px;
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: background 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+}
+
+.value-micro-module:hover {
+  background: rgba(10, 15, 30, 0.6);
+  border-color: rgba(255, 75, 31, 0.3);
+  transform: translateY(-5px);
+}
+
+.value-indicator {
+  width: 16px;
+  height: 16px;
+  border: 2px solid var(--color-plasma-orange);
+  border-radius: 4px;
+  margin-top: 2px;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.value-indicator::after {
+  content: '';
+  position: absolute;
+  inset: 3px;
+  background: var(--color-plasma-orange);
+  border-radius: 1px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.value-micro-module:hover .value-indicator::after { opacity: 1; }
+
+.value-content { display: flex; flex-direction: column; gap: 8px; }
+.value-content h4 { font-family: var(--font-heading); font-size: 0.9rem; letter-spacing: 0.1em; color: #fff; }
+.value-content p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.5; margin: 0; }
+
+
+/* =========================================
+   RESPONSIVE DESIGN (MOBILE VERTICAL)
+   ========================================= */
+@media (max-width: 992px) {
+  .mission-content-wrapper { grid-template-columns: 1fr; gap: 30px; }
+  
+  /* Reset Transmission Container for Vertical Layout */
+  .ecosystem-transmission {
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto 60px;
+    gap: 30px;
+  }
+  
+  .blazebyte-core-wrapper {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    order: 0; /* Core is at the very top */
+    margin-bottom: 20px;
+  }
+  
+  .nodes-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    align-items: center;
+  }
+  
+  .system-node {
+    position: relative;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    transform: none !important;
+    width: 280px; /* Fixed mobile width */
+    margin: 0;
+  }
+  
+  /* Vertical Signal Lines */
+  .mobile-connector-line {
+    width: 2px;
+    height: 30px;
+    background: linear-gradient(to bottom, rgba(0, 210, 255, 0.4), rgba(0, 210, 255, 0.1));
+    margin: 0 auto;
+  }
+  
+  .core-out {
+    position: absolute;
+    bottom: -50px;
+    height: 30px;
+  }
+
+  .values-grid { grid-template-columns: 1fr; gap: 15px; }
+}
