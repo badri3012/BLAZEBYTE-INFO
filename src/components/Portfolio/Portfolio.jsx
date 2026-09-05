@@ -72,8 +72,8 @@ const projects = [
   }
 ];
 
-// Interactive Featured Card (Retains direct link CTA)
-const InteractiveFeaturedCard = ({ project }) => {
+// Interactive Featured Card
+const InteractiveFeaturedCard = ({ project, isMobile }) => {
   const [isHovered, setIsHovered] = useState(false);
   const x = useMotionValue(0);
   const y = useMotionValue(0);
@@ -85,6 +85,7 @@ const InteractiveFeaturedCard = ({ project }) => {
   const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-3deg", "3deg"]);
 
   const handleMouseMove = (e) => {
+    if (isMobile) return;
     const rect = e.currentTarget.getBoundingClientRect();
     const mouseX = (e.clientX - rect.left) / rect.width - 0.5;
     const mouseY = (e.clientY - rect.top) / rect.height - 0.5;
@@ -93,6 +94,7 @@ const InteractiveFeaturedCard = ({ project }) => {
   };
 
   const handleMouseLeave = () => {
+    if (isMobile) return;
     setIsHovered(false);
     x.set(0);
     y.set(0);
@@ -101,27 +103,27 @@ const InteractiveFeaturedCard = ({ project }) => {
   return (
     <motion.div 
       className="featured-project-module interactive-wrapper"
-      initial={{ opacity: 0, y: 40, scale: 0.95, filter: 'blur(10px)' }}
+      initial={{ opacity: 0, y: isMobile ? 12 : 40, scale: isMobile ? 1 : 0.95, filter: isMobile ? 'blur(3px)' : 'blur(10px)' }}
       whileInView={{ opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' }}
-      viewport={{ once: true, margin: "-50px" }}
-      transition={{ duration: 0.8, ease: "easeOut" }}
-      style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
+      viewport={{ once: true, margin: isMobile ? "0px" : "-50px" }}
+      transition={{ duration: isMobile ? 0.35 : 0.8, ease: "easeOut" }}
+      style={{ rotateX: isMobile ? 0 : rotateX, rotateY: isMobile ? 0 : rotateY, transformStyle: "preserve-3d" }}
       onMouseMove={handleMouseMove}
-      onMouseEnter={() => setIsHovered(true)}
+      onMouseEnter={() => !isMobile && setIsHovered(true)}
       onMouseLeave={handleMouseLeave}
-      whileTap={{ scale: 0.98 }}
+      whileTap={isMobile ? { scale: 0.98 } : {}}
     >
       <div className={`scan-line ${isHovered ? 'active' : ''}`}></div>
       
-      <div className="transmission-label" style={{ transform: 'translateZ(20px)' }}>FEATURED TRANSMISSION // 001</div>
+      <div className="transmission-label" style={{ transform: isMobile ? 'none' : 'translateZ(20px)' }}>FEATURED TRANSMISSION // 001</div>
       
-      <div className="featured-content-wrapper" style={{ transform: 'translateZ(30px)' }}>
+      <div className="featured-content-wrapper" style={{ transform: isMobile ? 'none' : 'translateZ(30px)' }}>
         <div className="featured-image-container">
           <img src={project.image} alt={project.title} className="featured-image" loading="lazy" />
           <div className="glass-overlay glow-edge"></div>
         </div>
         
-        <div className="featured-metadata" style={{ transform: 'translateZ(40px)' }}>
+        <div className="featured-metadata" style={{ transform: isMobile ? 'none' : 'translateZ(40px)' }}>
           <div className="project-category">
             {project.icon} 
             <span>01 // {project.category}</span>
@@ -142,8 +144,8 @@ const InteractiveFeaturedCard = ({ project }) => {
   );
 };
 
-// Interactive Archive Card (Now triggers Modal overlay)
-const InteractiveArchiveCard = ({ project, index, yTransform, onSelect }) => {
+// Interactive Archive Card
+const InteractiveArchiveCard = ({ project, index, yTransform, onSelect, isMobile }) => {
   const [isHovered, setIsHovered] = useState(false);
   const x = useMotionValue(0);
   const y = useMotionValue(0);
@@ -155,6 +157,7 @@ const InteractiveArchiveCard = ({ project, index, yTransform, onSelect }) => {
   const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-5deg", "5deg"]);
 
   const handleMouseMove = (e) => {
+    if (isMobile) return;
     const rect = e.currentTarget.getBoundingClientRect();
     const mouseX = (e.clientX - rect.left) / rect.width - 0.5;
     const mouseY = (e.clientY - rect.top) / rect.height - 0.5;
@@ -163,6 +166,7 @@ const InteractiveArchiveCard = ({ project, index, yTransform, onSelect }) => {
   };
 
   const handleMouseLeave = () => {
+    if (isMobile) return;
     setIsHovered(false);
     x.set(0);
     y.set(0);
@@ -171,25 +175,25 @@ const InteractiveArchiveCard = ({ project, index, yTransform, onSelect }) => {
   return (
     <motion.div 
       className={`archive-module-wrapper ${index % 2 === 0 ? 'offset-down' : ''}`}
-      style={{ y: yTransform }}
-      initial={{ opacity: 0, scale: 0.9, filter: 'blur(10px)' }}
-      whileInView={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
-      viewport={{ once: true, margin: "-100px" }}
-      transition={{ duration: 0.8, delay: index * 0.1, ease: "easeOut" }}
+      style={isMobile ? {} : { y: yTransform }}
+      initial={{ opacity: 0, scale: isMobile ? 1 : 0.9, filter: isMobile ? 'blur(3px)' : 'blur(10px)', y: isMobile ? 12 : 0 }}
+      whileInView={{ opacity: 1, scale: 1, filter: 'blur(0px)', y: 0 }}
+      viewport={{ once: true, margin: isMobile ? "0px" : "-100px" }}
+      transition={{ duration: isMobile ? 0.35 : 0.8, delay: isMobile ? 0 : index * 0.1, ease: "easeOut" }}
     >
       <motion.div
         className="archive-module interactive-wrapper clickable"
-        style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
+        style={{ rotateX: isMobile ? 0 : rotateX, rotateY: isMobile ? 0 : rotateY, transformStyle: "preserve-3d" }}
         onMouseMove={handleMouseMove}
-        onMouseEnter={() => setIsHovered(true)}
+        onMouseEnter={() => !isMobile && setIsHovered(true)}
         onMouseLeave={handleMouseLeave}
         onClick={() => onSelect(project)}
-        whileHover="hover"
+        whileHover={!isMobile ? "hover" : ""}
         whileTap={{ scale: 0.97 }}
       >
         <div className={`scan-line ${isHovered ? 'active' : ''}`}></div>
         
-        <div className="archive-image-container" style={{ transform: 'translateZ(20px)' }}>
+        <div className="archive-image-container" style={{ transform: isMobile ? 'none' : 'translateZ(20px)' }}>
           <motion.img 
             src={project.image} 
             alt={project.title} 
@@ -198,22 +202,24 @@ const InteractiveArchiveCard = ({ project, index, yTransform, onSelect }) => {
           />
           <div className="archive-glass-overlay glow-edge"></div>
           
-          <motion.div 
-            className="archive-hover-meta"
-            variants={{
-              hover: { opacity: 1, y: 0 }
-            }}
-            initial={{ opacity: 0, y: 15 }}
-            transition={{ duration: 0.3 }}
-            style={{ transform: 'translateZ(30px)' }}
-          >
-            <button className="btn-icon">
-              <ArrowRight size={20} />
-            </button>
-          </motion.div>
+          {!isMobile && (
+            <motion.div 
+              className="archive-hover-meta"
+              variants={{
+                hover: { opacity: 1, y: 0 }
+              }}
+              initial={{ opacity: 0, y: 15 }}
+              transition={{ duration: 0.3 }}
+              style={{ transform: 'translateZ(30px)' }}
+            >
+              <button className="btn-icon">
+                <ArrowRight size={20} />
+              </button>
+            </motion.div>
+          )}
         </div>
         
-        <div className="archive-metadata" style={{ transform: 'translateZ(30px)' }}>
+        <div className="archive-metadata" style={{ transform: isMobile ? 'none' : 'translateZ(30px)' }}>
           <div className="project-category">
             <span>0{project.id} // {project.category}</span>
           </div>
@@ -228,7 +234,7 @@ const InteractiveArchiveCard = ({ project, index, yTransform, onSelect }) => {
 };
 
 // Cinematic Project Modal Component
-const ProjectModal = ({ project, onClose }) => {
+const ProjectModal = ({ project, onClose, isMobile }) => {
   useEffect(() => {
     const handleEsc = (e) => {
       if (e.key === 'Escape') onClose();
@@ -239,78 +245,109 @@ const ProjectModal = ({ project, onClose }) => {
 
   if (!project) return null;
 
+  // Staggered variants for fast mobile rendering
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { 
+        staggerChildren: 0.04,
+        delayChildren: 0.1
+      }
+    },
+    exit: { opacity: 0, transition: { duration: 0.2 } }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 12, filter: isMobile ? 'blur(0px)' : 'blur(4px)' },
+    visible: { opacity: 1, y: 0, filter: 'blur(0px)', transition: { duration: 0.35, ease: "easeOut" } }
+  };
+
   return (
     <motion.div 
       className="project-modal-backdrop"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
+      transition={{ duration: 0.3 }}
       onClick={onClose}
     >
       <motion.div 
         className="project-modal-content glass-panel"
-        initial={{ opacity: 0, scale: 0.95, y: 20 }}
+        initial={{ opacity: 0, scale: isMobile ? 1 : 0.95, y: isMobile ? 20 : 20 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         exit={{ opacity: 0, scale: 0.95, y: 20 }}
         transition={{ duration: 0.4, type: "spring", bounce: 0.2 }}
-        onClick={(e) => e.stopPropagation()} // Prevent clicks inside from closing
+        onClick={(e) => e.stopPropagation()} 
       >
         <button className="modal-close-btn" onClick={onClose}>
           <X size={16} /> CLOSE TRANSMISSION
         </button>
 
-        <div className="modal-header">
-          <div className="modal-transmission-id">PROJECT TRANSMISSION // 0{project.id}</div>
-          <div className="modal-status">
-            <span className={`status-dot ${project.status === 'LIVE' ? 'green' : project.status === 'CONCEPT' ? 'blue' : 'orange'}`}></span> 
-            STATUS: {project.status}
-          </div>
-        </div>
-
-        <div className="modal-hero">
-          <img src={project.image} alt={project.title} className="modal-image" />
-          <div className="modal-hero-overlay"></div>
-        </div>
-
-        <div className="modal-body">
-          <div className="modal-title-area">
-            <h4 className="modal-category">{project.category}</h4>
-            <h2 className="modal-title">{project.title}</h2>
-          </div>
-
-          <div className="modal-grid">
-            <div className="modal-col modal-col-main">
-              <h3 className="modal-subheading">PROJECT OVERVIEW</h3>
-              <p className="modal-overview-text">{project.overview}</p>
+        <motion.div 
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+          exit="exit"
+          className="modal-stagger-wrapper"
+        >
+          <motion.div variants={itemVariants} className="modal-header">
+            <div className="modal-transmission-id">PROJECT TRANSMISSION // 0{project.id}</div>
+            <div className="modal-status">
+              <span className={`status-dot ${project.status === 'LIVE' ? 'green' : project.status === 'CONCEPT' ? 'blue' : 'orange'}`}></span> 
+              STATUS: {project.status}
             </div>
-            
-            <div className="modal-col modal-col-side">
-              <h3 className="modal-subheading">WHAT WE BUILT</h3>
-              <ul className="modal-services-list">
-                {project.services.map((service, idx) => (
-                  <li key={idx}>
-                    <ArrowRight size={14} className="list-icon" /> {service}
-                  </li>
-                ))}
-              </ul>
+          </motion.div>
 
-              <h3 className="modal-subheading mt-6">TECH / CAPABILITIES</h3>
-              <div className="project-tags modal-tags">
-                {project.tags.map((tag, idx) => (
-                  <span key={idx} className="tag">{tag}</span>
-                ))}
+          <motion.div variants={itemVariants} className="modal-hero">
+            <img src={project.image} alt={project.title} className="modal-image" />
+            <div className="modal-hero-overlay"></div>
+          </motion.div>
+
+          <div className="modal-body">
+            <motion.div variants={itemVariants} className="modal-title-area">
+              <h4 className="modal-category">{project.category}</h4>
+              <h2 className="modal-title">{project.title}</h2>
+            </motion.div>
+
+            <div className="modal-grid">
+              <motion.div variants={itemVariants} className="modal-col modal-col-main">
+                <h3 className="modal-subheading">PROJECT OVERVIEW</h3>
+                <p className="modal-overview-text">{project.overview}</p>
+              </motion.div>
+              
+              <div className="modal-col modal-col-side">
+                <motion.div variants={itemVariants}>
+                  <h3 className="modal-subheading">WHAT WE BUILT</h3>
+                  <ul className="modal-services-list">
+                    {project.services.map((service, idx) => (
+                      <motion.li key={idx} variants={itemVariants}>
+                        <ArrowRight size={14} className="list-icon" /> {service}
+                      </motion.li>
+                    ))}
+                  </ul>
+                </motion.div>
+
+                <motion.div variants={itemVariants}>
+                  <h3 className="modal-subheading mt-6">TECH / CAPABILITIES</h3>
+                  <div className="project-tags modal-tags">
+                    {project.tags.map((tag, idx) => (
+                      <motion.span key={idx} variants={itemVariants} className="tag">{tag}</motion.span>
+                    ))}
+                  </div>
+                </motion.div>
               </div>
             </div>
-          </div>
 
-          {project.link && (
-            <div className="modal-footer">
-              <a href={project.link} target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ textDecoration: 'none' }}>
-                VIEW LIVE PROJECT ↗
-              </a>
-            </div>
-          )}
-        </div>
+            {project.link && (
+              <motion.div variants={itemVariants} className="modal-footer">
+                <a href={project.link} target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ textDecoration: 'none' }}>
+                  VIEW LIVE PROJECT ↗
+                </a>
+              </motion.div>
+            )}
+          </div>
+        </motion.div>
       </motion.div>
     </motion.div>
   );
@@ -318,6 +355,7 @@ const ProjectModal = ({ project, onClose }) => {
 
 const Portfolio = () => {
   const [selectedProject, setSelectedProject] = useState(null);
+  const [isMobile, setIsMobile] = useState(false);
   const { scrollYProgress } = useScroll();
   
   // Parallax speeds for asymmetric grid
@@ -325,19 +363,24 @@ const Portfolio = () => {
   const ySpeed2 = useTransform(scrollYProgress, [0, 1], [0, -150]);
   const ySpeed3 = useTransform(scrollYProgress, [0, 1], [0, -40]);
 
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 768);
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   // Handle Body Scroll Lock
   useEffect(() => {
     if (selectedProject) {
-      // Calculate scrollbar width to prevent layout shift
       const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
       document.body.style.overflow = 'hidden';
-      document.body.style.paddingRight = `${scrollbarWidth}px`; // Prevent layout jump
+      document.body.style.paddingRight = `${scrollbarWidth}px`; 
     } else {
       document.body.style.overflow = '';
       document.body.style.paddingRight = '';
     }
     
-    // Cleanup on unmount
     return () => {
       document.body.style.overflow = '';
       document.body.style.paddingRight = '';
@@ -352,18 +395,19 @@ const Portfolio = () => {
         <div className="portfolio-header">
           <motion.div 
             className="section-badge"
-            initial={{ opacity: 0, y: 20, filter: 'blur(5px)' }}
+            initial={{ opacity: 0, y: isMobile ? 12 : 20, filter: isMobile ? 'blur(3px)' : 'blur(5px)' }}
             whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
             viewport={{ once: true }}
+            transition={{ duration: isMobile ? 0.35 : 0.6, ease: "easeOut" }}
           >
             <span className="status-dot-small"></span> BLAZEBYTE // DIGITAL ARCHIVES
           </motion.div>
           <motion.h2 
             className="section-title"
-            initial={{ opacity: 0, y: 20, filter: 'blur(8px)' }}
+            initial={{ opacity: 0, y: isMobile ? 12 : 20, filter: isMobile ? 'blur(3px)' : 'blur(8px)' }}
             whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
             viewport={{ once: true }}
-            transition={{ delay: 0.1, duration: 0.6, ease: "easeOut" }}
+            transition={{ delay: isMobile ? 0 : 0.1, duration: isMobile ? 0.35 : 0.6, ease: "easeOut" }}
           >
             SELECTED WORK <span className="title-accent">// PROJECT ARCHIVE</span>
           </motion.h2>
@@ -371,7 +415,7 @@ const Portfolio = () => {
 
         {/* FEATURED TRANSMISSION (Project 1) */}
         <div className="featured-transmission">
-          <InteractiveFeaturedCard project={projects[0]} />
+          <InteractiveFeaturedCard project={projects[0]} isMobile={isMobile} />
         </div>
 
         {/* ASYMMETRIC FLOATING GRID (Projects 2-6) */}
@@ -385,6 +429,7 @@ const Portfolio = () => {
                 index={index} 
                 yTransform={yTransform} 
                 onSelect={setSelectedProject} 
+                isMobile={isMobile}
               />
             );
           })}
@@ -398,6 +443,7 @@ const Portfolio = () => {
           <ProjectModal 
             project={selectedProject} 
             onClose={() => setSelectedProject(null)} 
+            isMobile={isMobile}
           />
         )}
       </AnimatePresence>
