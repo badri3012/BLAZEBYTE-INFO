@@ -1,0 +1,15 @@
+{
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "blazebyte.info"
+        }
+      ],
+      "destination": "https://www.blazebyte.info/$1",
+      "permanent": true
+    }
+  ]
+}
