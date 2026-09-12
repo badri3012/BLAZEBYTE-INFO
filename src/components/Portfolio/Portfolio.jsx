@@ -28,14 +28,15 @@ const projects = [
   },
   {
     id: 3,
-    title: 'Premium Real Estate Platform',
-    category: 'WEB PLATFORM',
-    tags: ['3D RENDERING', 'UI/UX'],
+    title: 'BLAZEBYTE REALTY',
+    category: 'REAL ESTATE / DIGITAL EXPERIENCE',
+    tags: ['REAL ESTATE', 'WEB PLATFORM', 'UI/UX'],
     image: '/proj_realestate.png',
     icon: <Box size={18} />,
     overview: 'An immersive property exploration platform leveraging high-performance 3D rendering and an intuitive filtering architecture to redefine digital luxury real estate.',
     services: ['WEB PLATFORM', '3D RENDERING', 'FRONTEND ARCHITECTURE', 'UI/UX'],
-    status: 'CONCEPT'
+    status: 'LIVE',
+    link: 'https://blazebyte-realty.vercel.app/'
   },
   {
     id: 4,
@@ -46,7 +47,7 @@ const projects = [
     icon: <Layers size={18} />,
     overview: 'A comprehensive brand design system encompassing bespoke typography, highly structured digital brand guidelines, and a unified visual language crafted for a modern tech startup.',
     services: ['IDENTITY DESIGN', 'DESIGN SYSTEM', 'BRANDING', 'CREATIVE DIRECTION'],
-    status: 'LIVE'
+    status: 'CASE STUDY'
   },
   {
     id: 5,
@@ -57,7 +58,7 @@ const projects = [
     icon: <Terminal size={18} />,
     overview: 'A highly complex, data-heavy SaaS interface designed to simplify financial tracking, employee management, and operational metrics into a single fluid digital environment.',
     services: ['SaaS INTERFACE', 'DATA VISUALIZATION', 'USER EXPERIENCE', 'SYSTEM DESIGN'],
-    status: 'LIVE'
+    status: 'CASE STUDY'
   },
   {
     id: 6,
@@ -69,6 +70,18 @@ const projects = [
     overview: 'An experimental, award-winning interactive canvas utilizing pure WebGL and Framer Motion to push the boundaries of browser-based cinematic storytelling.',
     services: ['WEBGL / INTERACTIVE', 'CREATIVE DEV', 'ANIMATION', 'MOTION GRAPHICS'],
     status: 'CONCEPT'
+  },
+  {
+    id: 7,
+    title: 'BLAZEBYTE CAFE',
+    category: 'WEB DEVELOPMENT / DIGITAL EXPERIENCE',
+    tags: ['CAFE / HOSPITALITY', 'WEB DEVELOPMENT', 'UI/UX'],
+    image: '/proj_cafe.png',
+    icon: <Monitor size={18} />,
+    overview: 'A premium digital experience designed for a modern café, combining strong visual identity, clear menu presentation, and a conversion-focused customer journey.',
+    services: ['WEB DEVELOPMENT', 'DIGITAL EXPERIENCE', 'UI/UX', 'FRONTEND ARCHITECTURE'],
+    status: 'LIVE',
+    link: 'https://blazebyte-cafe.vercel.app/'
   }
 ];
 
@@ -136,7 +149,7 @@ const InteractiveFeaturedCard = ({ project, isMobile }) => {
             ))}
           </div>
           <a href={project.link} target="_blank" rel="noopener noreferrer" className="btn-primary mt-4" style={{ textDecoration: 'none', display: 'inline-flex' }}>
-            VIEW LIVE PROJECT <ArrowRight size={18} />
+            VIEW PROJECT →
           </a>
         </div>
       </div>
@@ -342,7 +355,7 @@ const ProjectModal = ({ project, onClose, isMobile }) => {
             {project.link && (
               <motion.div variants={itemVariants} className="modal-footer">
                 <a href={project.link} target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ textDecoration: 'none' }}>
-                  VIEW LIVE PROJECT ↗
+                  VIEW PROJECT →
                 </a>
               </motion.div>
             )}
