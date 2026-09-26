@@ -1,180 +1,105 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
-import { PenTool, Code, Cpu, TrendingUp } from 'lucide-react';
+import { Building2, User, Award, ShieldCheck, MapPin } from 'lucide-react';
 import './About.css';
 
 const About = () => {
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth <= 992);
-    handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
-  const nodes = [
-    { id: 'creative', title: 'CREATIVE', subtitle: 'BRANDING + CONTENT', icon: PenTool, delay: 0.2 },
-    { id: 'build', title: 'BUILD', subtitle: 'WEB + DIGITAL PRODUCTS', icon: Code, delay: 0.4 },
-    { id: 'automate', title: 'AUTOMATE', subtitle: 'AI + WORKFLOWS', icon: Cpu, delay: 0.6 },
-    { id: 'grow', title: 'GROW', subtitle: 'MARKETING + STRATEGY', icon: TrendingUp, delay: 0.8 },
-  ];
-
-  const values = [
-    { title: 'CREATE WITH PURPOSE', desc: 'Every design decision should solve a real problem.' },
-    { title: 'BUILD FOR IMPACT', desc: 'Technology should create measurable business value.' },
-    { title: 'THINK BEYOND TODAY', desc: 'We build digital systems designed for the future.' }
-  ];
-
   return (
     <section className="about-section section-padding" id="about">
-      <div className="container about-container">
-        
-        {/* Section Label */}
-        <div className="section-header-center">
-          <motion.div 
-            className="section-badge"
-            initial={{ opacity: 0, y: 20, filter: 'blur(5px)' }}
-            whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-            viewport={{ once: true }}
+      <div className="container">
+        <div className="about-grid">
+          {/* Left Column: Editorial Copy */}
+          <motion.div
+            className="about-copy-col"
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: '-50px' }}
+            transition={{ duration: 0.6 }}
           >
-            <span className="status-dot-small"></span> ORIGIN // MISSION // FUTURE
+            <div className="section-badge">
+              <span className="section-badge-dot"></span> BLAZEBYTE STUDIO // ABOUT
+            </div>
+            <h2 className="section-title">THE STUDIO</h2>
+
+            <p className="about-lead">
+              BlazeByte Studio is a digital solutions studio based in Coimbatore, India, focused on professional websites, digital experiences and practical technology solutions for businesses.
+            </p>
+
+            <p className="about-body">
+              We operate at the intersection of strategic brand identity, custom frontend architecture, and practical back-end integration. Every project we undertake is executed with architectural rigor, transparent scope, and commercial outcome in mind.
+            </p>
+
+            <div className="about-values">
+              <div className="value-item">
+                <span className="value-num">01</span>
+                <div>
+                  <h4>Zero Template Clutter</h4>
+                  <p>Bespoke web solutions built line-by-line for high performance and unique brand positioning.</p>
+                </div>
+              </div>
+              <div className="value-item">
+                <span className="value-num">02</span>
+                <div>
+                  <h4>Direct Engineering Access</h4>
+                  <p>Work directly with product designers and engineers without intermediate account noise.</p>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Right Column: Verified Business Information Card */}
+          <motion.div
+            className="about-info-col"
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: '-50px' }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+          >
+            <div className="business-card editorial-card">
+              <div className="card-top-tag">
+                <ShieldCheck size={16} className="accent-icon" /> VERIFIED STUDIO REGISTRATION
+              </div>
+
+              <h3 className="biz-name">BLAZE BYTE STUDIO</h3>
+              <p className="biz-tagline">Digital Experiences • Technology • Growth</p>
+
+              <div className="biz-details-list">
+                <div className="biz-detail-row">
+                  <div className="biz-detail-label">
+                    <User size={15} /> FOUNDER
+                  </div>
+                  <div className="biz-detail-value">Badri Narayanan</div>
+                </div>
+
+                <div className="biz-detail-row">
+                  <div className="biz-detail-label">
+                    <Building2 size={15} /> ENTERPRISE CLASS
+                  </div>
+                  <div className="biz-detail-value">Micro Enterprise</div>
+                </div>
+
+                <div className="biz-detail-row">
+                  <div className="biz-detail-label">
+                    <Award size={15} /> UDYAM REGISTRATION
+                  </div>
+                  <div className="biz-detail-value mono">UDYAM-TN-03-0334061</div>
+                </div>
+
+                <div className="biz-detail-row">
+                  <div className="biz-detail-label">
+                    <MapPin size={15} /> LOCATION
+                  </div>
+                  <div className="biz-detail-value">Coimbatore, Tamil Nadu, India</div>
+                </div>
+              </div>
+
+              <div className="biz-card-footer">
+                <span className="status-indicator-dot"></span>
+                <span>REGISTERED MSME UNIT • GOVERNMENT OF INDIA</span>
+              </div>
+            </div>
           </motion.div>
         </div>
-
-        {/* Mission Statement */}
-        <motion.div 
-          className="mission-module"
-          initial={{ opacity: 0, y: 30, filter: 'blur(10px)' }}
-          whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-        >
-          <h2 className="cinematic-heading">
-            WE DON'T JUST BUILD WEBSITES.<br/>
-            WE BUILD <span className="text-gradient">DIGITAL EXPERIENCES</span> BUILT FOR WHAT'S NEXT.
-          </h2>
-          <div className="mission-content-wrapper">
-            <div className="mission-text-col">
-              <p>
-                BlazeByte Studio combines creative thinking, modern web technology, AI automation, digital marketing, and strong brand systems to help businesses move beyond ordinary digital experiences.
-              </p>
-              <p>
-                We believe technology should not feel complicated. It should feel powerful, intuitive, and built around real business growth.
-              </p>
-            </div>
-            <div className="our-mission-box glass-panel">
-              <div className="om-header">
-                <span className="dot red"></span>
-                <span className="dot yellow"></span>
-                <span className="dot green"></span>
-                <span className="om-title">OUR MISSION</span>
-              </div>
-              <p>To help ambitious businesses build a stronger digital presence through creative technology, intelligent automation, powerful design, and future-ready digital systems.</p>
-            </div>
-          </div>
-        </motion.div>
-
-        {/* Holographic Ecosystem Transmission */}
-        <div className="ecosystem-transmission">
-          
-          {/* Desktop Radial Connections (Hidden on Mobile) */}
-          {!isMobile && (
-            <svg className="desktop-connections" viewBox="0 0 1000 600">
-              <defs>
-                <linearGradient id="lineGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" stopColor="rgba(0, 210, 255, 0.1)" />
-                  <stop offset="50%" stopColor="var(--color-electric-blue)" />
-                  <stop offset="100%" stopColor="rgba(0, 210, 255, 0.1)" />
-                </linearGradient>
-              </defs>
-              {/* Radial Lines connecting center (500, 300) to nodes */}
-              <motion.path d="M 300,150 L 500,300" className="radial-line" initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} transition={{ duration: 1.2, delay: 0.2, ease: "circOut" }} viewport={{ once: true }} />
-              <motion.path d="M 700,150 L 500,300" className="radial-line" initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} transition={{ duration: 1.2, delay: 0.4, ease: "circOut" }} viewport={{ once: true }} />
-              <motion.path d="M 300,450 L 500,300" className="radial-line" initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} transition={{ duration: 1.2, delay: 0.6, ease: "circOut" }} viewport={{ once: true }} />
-              <motion.path d="M 700,450 L 500,300" className="radial-line" initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} transition={{ duration: 1.2, delay: 0.8, ease: "circOut" }} viewport={{ once: true }} />
-              
-              {/* Animated Data Particles */}
-              <circle r="3" className="data-particle dp-1" />
-              <circle r="3" className="data-particle dp-2" />
-              <circle r="3" className="data-particle dp-3" />
-              <circle r="3" className="data-particle dp-4" />
-            </svg>
-          )}
-
-          {/* Central Core */}
-          <div className="blazebyte-core-wrapper">
-            {/* Mobile Vertical Connection Line (Top) */}
-            {isMobile && <motion.div className="mobile-connector-line core-out" initial={{ scaleY: 0 }} whileInView={{ scaleY: 1 }} viewport={{ once: true }} transition={{ duration: 0.6, ease: "easeOut" }} style={{ transformOrigin: "top" }}></motion.div>}
-            
-            <motion.div 
-              className="blazebyte-core"
-              initial={{ scale: 0.8, opacity: 0, filter: 'blur(10px)' }}
-              whileInView={{ scale: 1, opacity: 1, filter: 'blur(0px)' }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, ease: "easeOut" }}
-            >
-              <div className="core-rings">
-                <div className="ring ring-1"></div>
-                <div className="ring ring-2"></div>
-                <div className="ring ring-3"></div>
-              </div>
-              <div className="core-logo-container">
-                <img src="/blazebyte-logo.jpg" alt="BlazeByte Core" className="core-logo" loading="lazy" />
-                <div className="core-glow-overlay"></div>
-              </div>
-              <div className="core-label">BLAZEBYTE CORE</div>
-            </motion.div>
-          </div>
-
-          {/* Nodes */}
-          <div className="nodes-container">
-            {nodes.map((node, i) => (
-              <React.Fragment key={node.id}>
-                <motion.div 
-                  className={`system-node node-${node.id}`}
-                  initial={{ opacity: 0, scale: 0.8, y: 20, filter: 'blur(8px)' }}
-                  whileInView={{ opacity: 1, scale: 1, y: 0, filter: 'blur(0px)' }}
-                  viewport={{ once: true, margin: "-50px" }}
-                  transition={{ duration: 0.6, delay: node.delay, ease: "easeOut" }}
-                >
-                  <div className="node-icon-wrapper">
-                    <node.icon size={24} className="node-icon" />
-                    <div className="icon-glow"></div>
-                  </div>
-                  <div className="node-text">
-                    <h4>{node.title}</h4>
-                    <span>{node.subtitle}</span>
-                  </div>
-                </motion.div>
-                {/* Mobile Vertical Connection Line (Between Nodes) */}
-                {isMobile && i < nodes.length - 1 && <motion.div className="mobile-connector-line" initial={{ scaleY: 0 }} whileInView={{ scaleY: 1 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: node.delay, ease: "easeOut" }} style={{ transformOrigin: "top" }}></motion.div>}
-              </React.Fragment>
-            ))}
-          </div>
-          
-        </div>
-
-        {/* Company Values */}
-        <div className="values-grid">
-          {values.map((value, i) => (
-            <motion.div 
-              key={i}
-              className="value-micro-module glass-panel"
-              initial={{ opacity: 0, y: 30, filter: 'blur(8px)' }}
-              whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: i * 0.2, ease: "easeOut" }}
-            >
-              <div className="value-indicator"></div>
-              <div className="value-content">
-                <h4>{value.title}</h4>
-                <p>{value.desc}</p>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-
       </div>
     </section>
   );

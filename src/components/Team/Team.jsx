@@ -1,133 +1,91 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { User, Activity } from 'lucide-react';
 import './Team.css';
 
-const TeamCard = ({ member, delay }) => {
-  const isFounder = member.id === 'BB-001';
-  
-  return (
-    <motion.div 
-      className={`team-card ${isFounder ? 'founder-card' : ''}`}
-      initial={{ opacity: 0, y: 30, scale: 0.95, filter: 'blur(10px)' }}
-      whileInView={{ opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' }}
-      viewport={{ once: true, margin: "-50px" }}
-      transition={{ duration: 0.8, delay, ease: "easeOut" }}
-    >
-      <div className="id-badge">
-        <div className="badge-header">
-          <div className="badge-logo">BB-SYS</div>
-          <div className="badge-status">
-            {isFounder && <span className="founder-label">FOUNDER // CORE SYSTEM</span>}
-            <span className="status-dot"></span> ACTIVE
-          </div>
-        </div>
-        
-        <div className="badge-profile">
-          <div className="profile-image-container">
-            <div className="profile-image-placeholder">
-              <User size={40} className="placeholder-icon" />
-            </div>
-            <div className="scanner-line"></div>
-          </div>
-          
-          <div className="profile-info">
-            <h4 className="member-name">{member.name}</h4>
-            <div className="member-role">{member.role}</div>
-            
-            <div className="member-data">
-              <div className="data-row">
-                <span className="data-label">ID:</span>
-                <span className="data-value">{member.id}</span>
-              </div>
-              <div className="data-row">
-                <span className="data-label">LVL:</span>
-                <span className="data-value">{member.level}</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="badge-description">
-          <p>{member.description}</p>
-        </div>
-        
-        <div className="badge-skills">
-          {member.skills.map((skill, i) => (
-            <span key={i} className="skill-tag">{skill}</span>
-          ))}
-        </div>
-        
-        <div className="badge-footer">
-          <Activity size={16} className="activity-icon" />
-          <div className="barcode">|| ||| | || ||| | |||</div>
-        </div>
-      </div>
-    </motion.div>
-  );
-};
+const teamMembers = [
+  {
+    num: '01',
+    initials: 'BN',
+    name: 'BADRI NARAYANAN',
+    role: 'Founder / Creative & Technology Lead',
+  },
+  {
+    num: '02',
+    initials: 'J',
+    name: 'JERSON',
+    role: 'Sales Manager',
+  },
+  {
+    num: '03',
+    initials: 'S',
+    name: 'SARASWATHI',
+    role: 'Operations Manager',
+  },
+  {
+    num: '04',
+    initials: 'B',
+    name: 'BHARATH',
+    role: 'Web Designer',
+  },
+  {
+    num: '05',
+    initials: 'P',
+    name: 'PRABHA',
+    role: 'Web Developer',
+  },
+  {
+    num: '06',
+    initials: 'PK',
+    name: 'PRANEETH KUMAR',
+    role: 'Client Handling & Lead Specialist',
+    isNew: true,
+  },
+];
 
 const Team = () => {
-  const teamMembers = [
-    {
-      name: "BADRI NARAYANAN",
-      role: "FOUNDER & CREATIVE TECH LEAD",
-      description: "Founder of BlazeByte Studio, overseeing the company's overall vision, strategy, creative direction, technology, web development, AI solutions, and project execution.",
-      id: "BB-001",
-      level: "99",
-      skills: ["LEADERSHIP", "WEB DEV", "AI AUTOMATION", "CREATIVE STRATEGY"]
-    },
-    {
-      name: "BHARATH RAJ",
-      role: "CONTENT & WEB DESIGNER",
-      description: "Responsible for creating engaging digital content and designing modern, visually powerful web experiences for BlazeByte Studio and its clients.",
-      id: "BB-002",
-      level: "96",
-      skills: ["CONTENT CREATION", "WEB DESIGN", "UI/UX", "CREATIVE DESIGN"]
-    },
-    {
-      name: "JERSON",
-      role: "SALES & BUSINESS DEV",
-      description: "Focused on client communication, lead conversion, sales strategy, business opportunities, and helping BlazeByte Studio build strong client relationships.",
-      id: "BB-003",
-      level: "95",
-      skills: ["SALES", "CLIENT ACQUISITION", "BUSINESS DEV", "NEGOTIATION"]
-    },
-    {
-      name: "SARASWATHI",
-      role: "OPERATIONS MANAGER",
-      description: "Responsible for coordinating operations, managing internal workflows, organizing projects, supporting the team, and ensuring smooth execution across BlazeByte Studio.",
-      id: "BB-004",
-      level: "97",
-      skills: ["OPERATIONS", "PROJECT MGMT", "TEAM COORDINATION", "WORKFLOW"]
-    }
-  ];
-
   return (
     <section className="team-section section-padding" id="team">
       <div className="container">
-        <div className="section-header">
-          <motion.div 
-            className="section-badge"
-            initial={{ opacity: 0, y: 20, filter: 'blur(5px)' }}
-            whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-          >
-            <span className="status-dot-small"></span> BLAZEBYTE STUDIO // CORE TEAM DATABASE
-          </motion.div>
-          <motion.h2 
-            className="section-title"
-            initial={{ opacity: 0, y: 20, filter: 'blur(8px)' }}
-            whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1, duration: 0.6, ease: "easeOut" }}
-          >THE <span className="title-accent">COLLECTIVE</span></motion.h2>
+        {/* Header */}
+        <div className="team-header">
+          <div className="section-badge">
+            <span className="section-badge-dot"></span> BLAZEBYTE STUDIO // TEAM
+          </div>
+          <h2 className="section-title">
+            THE PEOPLE<br />BEHIND THE WORK.
+          </h2>
+          <p className="section-subtitle">
+            BlazeByte Studio is built by a focused team combining technology, design, operations, client relationships, and business growth.
+          </p>
         </div>
-        
+
+        {/* 6 Member Editorial Grid */}
         <div className="team-grid">
-          {teamMembers.map((member, index) => (
-            <TeamCard key={index} member={member} delay={0.1 * (index + 1)} />
+          {teamMembers.map((member, idx) => (
+            <motion.div
+              key={member.num}
+              className={`team-card editorial-card ${member.isNew ? 'new-member-card' : ''}`}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-40px' }}
+              transition={{ duration: 0.5, delay: idx * 0.08 }}
+            >
+              <div className="team-card-top">
+                <span className="team-num">{member.num}</span>
+                {member.isNew && (
+                  <span className="new-member-badge">NEW TEAM MEMBER</span>
+                )}
+              </div>
+
+              <div className="avatar-circle">
+                <span className="avatar-initials">{member.initials}</span>
+              </div>
+
+              <div className="member-details">
+                <h3 className="member-name">{member.name}</h3>
+                <p className="member-role">{member.role}</p>
+              </div>
+            </motion.div>
           ))}
         </div>
       </div>

@@ -1,0 +1,45 @@
+warning: in the working copy of 'index.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/App.jsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/components/About/About.css', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/components/About/About.jsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/components/Background/ParticleBackground.jsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/components/Contact/Contact.css', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/components/Contact/Contact.jsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/components/Hero/Hero.css', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/components/Hero/Hero.jsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/components/Layout/Footer.css', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/components/Layout/Footer.jsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/components/Layout/Navbar.css', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/components/Layout/Navbar.jsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/components/Portfolio/Portfolio.css', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/components/Portfolio/Portfolio.jsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/components/Preloader/Preloader.css', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/components/Preloader/Preloader.jsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/components/Services/Services.css', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/components/Services/Services.jsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/components/Team/Team.css', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/components/Team/Team.jsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/index.css', LF will be replaced by CRLF the next time Git touches it
+ index.html                                       |  25 [32m+[m[31m-[m
+ src/App.jsx                                      |  22 [32m+[m[31m-[m
+ src/components/About/About.css                   | 465 [32m++++[m[31m-----------[m
+ src/components/About/About.jsx                   | 243 [32m+++[m[31m-----[m
+ src/components/Background/ParticleBackground.jsx | 112 [32m+[m[31m---[m
+ src/components/Contact/Contact.css               | 251 [32m+++[m[31m-----[m
+ src/components/Contact/Contact.jsx               | 336 [32m+++++++[m[31m----[m
+ src/components/Hero/Hero.css                     | 595 [32m++++[m[31m---------------[m
+ src/components/Hero/Hero.jsx                     | 131 [32m+++[m[31m--[m
+ src/components/Layout/Footer.css                 | 472 [32m+++[m[31m------------[m
+ src/components/Layout/Footer.jsx                 | 185 [32m++[m[31m----[m
+ src/components/Layout/Navbar.css                 | 396 [32m++++[m[31m---------[m
+ src/components/Layout/Navbar.jsx                 | 305 [32m++++[m[31m------[m
+ src/components/Portfolio/Portfolio.css           | 662 [32m+++++++[m[31m--------------[m
+ src/components/Portfolio/Portfolio.jsx           | 707 [32m++++++++++[m[31m-------------[m
+ src/components/Preloader/Preloader.css           | 342 [32m+[m[31m----------[m
+ src/components/Preloader/Preloader.jsx           | 140 [32m+[m[31m----[m
+ src/components/Services/Services.css             | 587 [32m++[m[31m-----------------[m
+ src/components/Services/Services.jsx             | 323 [32m+++[m[31m--------[m
+ src/components/Team/Team.css                     | 278 [32m+++[m[31m------[m
+ src/components/Team/Team.jsx                     | 196 [32m+++[m[31m----[m
+ src/index.css                                    | 304 [32m+++++[m[31m-----[m
+ 22 files changed, 2086 insertions(+), 4991 deletions(-)

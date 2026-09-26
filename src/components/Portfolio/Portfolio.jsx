@@ -1,466 +1,353 @@
 import React, { useState, useEffect } from 'react';
-import { motion, useScroll, useTransform, useMotionValue, useSpring, AnimatePresence } from 'framer-motion';
-import { ArrowRight, Box, Monitor, Smartphone, Layers, Terminal, Activity, X } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ArrowRight, ExternalLink, X, Globe } from 'lucide-react';
 import './Portfolio.css';
 
 const projects = [
   {
-    id: 1,
-    title: 'BLAZE BYTE RESTAURANT',
-    category: 'PREMIUM RESTAURANT DIGITAL EXPERIENCE',
-    tags: ['WEB DESIGN', 'UI/UX', 'BRANDING', 'DIGITAL EXPERIENCE'],
-    description: 'A premium digital dining experience designed to combine elegant visual storytelling, modern restaurant presentation, menu exploration, and seamless table reservations.',
+    id: '01',
+    title: 'ANDY FOODS GH',
+    category: 'Digital Experience',
+    location: 'Ghana',
+    tags: ['E-Commerce', 'Brand Experience', 'UI/UX'],
+    description: 'A modern African food distribution and digital experience platform designed to showcase Ghanaian food heritage and streamline order inquiries.',
     image: '/blazebyte_restaurant_showcase.png',
-    icon: <Monitor size={18} />,
-    isFeatured: true,
-    link: 'https://blazebyte-restaurent.vercel.app/'
+    overview: 'Andy Foods GH brings authentic Ghanaian food products to the digital market. We engineered a high-converting digital storefront with immersive storytelling and catalog exploration.',
+    services: ['WEB DEVELOPMENT', 'BRAND SYSTEM', 'UI/UX DESIGN', 'PRODUCT CATALOG'],
+    status: 'CASE STUDY',
+    type: 'case-study',
+    urlVerified: false,
+    link: null
   },
   {
-    id: 2,
-    title: 'AI Automation System',
-    category: 'ENTERPRISE SYSTEM',
-    tags: ['AI INTEGRATION', 'DASHBOARD'],
-    image: '/proj_ai.png',
-    icon: <Activity size={18} />,
-    overview: 'A robust enterprise dashboard engineered to orchestrate complex AI workflows, predictive data modeling, and automated lead routing systems for high-volume sales pipelines.',
-    services: ['AI INTEGRATION', 'DASHBOARD DEV', 'UI/UX', 'DATA VISUALIZATION'],
-    status: 'IN DEVELOPMENT'
+    id: '02',
+    title: 'VITAGOLD KITCHEN',
+    category: 'Hospitality Digital Experience',
+    location: 'West Africa',
+    tags: ['Hospitality', 'Web Experience', 'Menu System'],
+    description: 'A modern dining digital showcase built with elegant visual presentation, interactive menu systems, and seamless reservation booking.',
+    image: '/proj_restaurant.png',
+    overview: 'VitaGold Kitchen needed a digital presence that matched their culinary quality. We designed an editorial hospitality platform showcasing chef specials and online table bookings.',
+    services: ['HOSPITALITY WEB DEV', 'MENU SYSTEM', 'RESERVATION FLOW', 'UI/UX'],
+    status: 'CASE STUDY',
+    type: 'case-study',
+    urlVerified: false,
+    link: null
   },
   {
-    id: 3,
-    title: 'BLAZEBYTE REALTY',
-    category: 'REAL ESTATE / DIGITAL EXPERIENCE',
-    tags: ['REAL ESTATE', 'WEB PLATFORM', 'UI/UX'],
-    image: '/proj_realestate.png',
-    icon: <Box size={18} />,
-    overview: 'An immersive property exploration platform leveraging high-performance 3D rendering and an intuitive filtering architecture to redefine digital luxury real estate.',
-    services: ['WEB PLATFORM', '3D RENDERING', 'FRONTEND ARCHITECTURE', 'UI/UX'],
-    status: 'LIVE',
-    link: 'https://blazebyte-realty.vercel.app/'
-  },
-  {
-    id: 4,
-    title: 'Creative Brand Identity',
-    category: 'BRAND SYSTEM',
-    tags: ['IDENTITY', 'DESIGN SYSTEM'],
+    id: '03',
+    title: 'THE CATFISH GRILL',
+    category: 'Restaurant Digital Experience',
+    location: 'Ghana',
+    tags: ['Restaurant', 'Brand Experience', 'UI/UX'],
+    description: 'A vibrant grill and restaurant web platform crafted to showcase specialized seafood dining, location details, and order channels.',
     image: '/proj_branding.png',
-    icon: <Layers size={18} />,
-    overview: 'A comprehensive brand design system encompassing bespoke typography, highly structured digital brand guidelines, and a unified visual language crafted for a modern tech startup.',
-    services: ['IDENTITY DESIGN', 'DESIGN SYSTEM', 'BRANDING', 'CREATIVE DIRECTION'],
-    status: 'CASE STUDY'
+    overview: 'The Catfish Grill required a bold, appetite-focused digital platform. We designed an interactive food showcase with mobile-first menu navigation and social integrations.',
+    services: ['RESTAURANT WEB DEV', 'BRANDING', 'MOBILE UI/UX', 'ORDER SYSTEMS'],
+    status: 'LIVE PROJECT',
+    type: 'live',
+    urlVerified: true,
+    link: 'https://catfish-grill.vercel.app/'
   },
   {
-    id: 5,
-    title: 'Business Management Dashboard',
-    category: 'SaaS INTERFACE',
-    tags: ['DATA VISUALIZATION', 'UX'],
-    image: '/proj_dashboard.png',
-    icon: <Terminal size={18} />,
-    overview: 'A highly complex, data-heavy SaaS interface designed to simplify financial tracking, employee management, and operational metrics into a single fluid digital environment.',
-    services: ['SaaS INTERFACE', 'DATA VISUALIZATION', 'USER EXPERIENCE', 'SYSTEM DESIGN'],
-    status: 'CASE STUDY'
-  },
-  {
-    id: 6,
-    title: 'Custom Web Experience',
-    category: 'WEBGL / INTERACTIVE',
-    tags: ['CREATIVE DEV', 'ANIMATION'],
+    id: '04',
+    title: 'JIKONI',
+    category: 'Restaurant Experience',
+    location: 'Uganda',
+    tags: ['Hospitality', 'Digital Experience', 'UI/UX'],
+    description: 'An East African culinary web platform combining traditional hospitality storytelling with modern digital reservation and menu systems.',
     image: '/proj_webgl.png',
-    icon: <Smartphone size={18} />,
-    overview: 'An experimental, award-winning interactive canvas utilizing pure WebGL and Framer Motion to push the boundaries of browser-based cinematic storytelling.',
-    services: ['WEBGL / INTERACTIVE', 'CREATIVE DEV', 'ANIMATION', 'MOTION GRAPHICS'],
-    status: 'CONCEPT'
+    overview: 'Jikoni blends regional heritage with high-performance web engineering. The experience highlights seasonal menus and dining atmospheres with fluid transitions.',
+    services: ['CUSTOM WEB DEV', 'CREATIVE DIRECTION', 'RESERVATION SYSTEM', 'UI/UX'],
+    status: 'LIVE PROJECT',
+    type: 'live',
+    urlVerified: true,
+    link: 'https://jikoni.vercel.app/'
   },
   {
-    id: 7,
+    id: '05',
+    title: 'JE ME RÉGALE',
+    category: 'French-Fusion / Private Dining',
+    location: 'Ghana',
+    tags: ['Private Dining', 'Editorial Experience', 'UI/UX'],
+    description: 'A high-end French-fusion private dining digital experience featuring curated multi-course menus and VIP event booking.',
+    image: '/proj_realestate.png',
+    overview: 'Je Me Régale offers bespoke culinary events. We crafted an exclusive editorial web experience reflecting luxury gastronomy and private chef booking workflows.',
+    services: ['LUXURY WEB SYSTEM', 'VIP BOOKING', 'BRAND STORYTELLING', 'UI/UX'],
+    status: 'LIVE PROJECT',
+    type: 'live',
+    urlVerified: true,
+    link: 'https://jemeregale.vercel.app/'
+  },
+  {
+    id: '06',
+    title: 'BLAZEBYTE HUB',
+    category: 'Internal Digital Product',
+    location: 'Studio Core',
+    tags: ['Digital Product', 'SaaS Dashboard', 'React/Next.js'],
+    description: 'Our internal operations and project management dashboard engineered to orchestrate client workflows, sprint deliverables, and team skills.',
+    image: '/proj_dashboard.png',
+    overview: 'BlazeByte Hub is our proprietary operations platform. It unifies project tracking, milestone invoicing, RBAC permissions, and team productivity analytics.',
+    services: ['FULL STACK SAAS', 'NEXT.JS & PRISMA', 'DASHBOARD ARCHITECTURE', 'RBAC'],
+    status: 'INTERNAL DIGITAL PRODUCT',
+    type: 'internal',
+    urlVerified: true,
+    link: '#hub'
+  },
+  {
+    id: '07',
     title: 'BLAZEBYTE CAFE',
-    category: 'WEB DEVELOPMENT / DIGITAL EXPERIENCE',
-    tags: ['CAFE / HOSPITALITY', 'WEB DEVELOPMENT', 'UI/UX'],
+    category: 'Digital Experience Concept',
+    location: 'Concept Lab',
+    tags: ['Cafe & Roastery', 'E-Commerce', 'UI/UX'],
+    description: 'A concept web experience designed for modern specialty coffee roasteries, combining artisanal storytelling and coffee subscription ordering.',
     image: '/proj_cafe.png',
-    icon: <Monitor size={18} />,
-    overview: 'A premium digital experience designed for a modern café, combining strong visual identity, clear menu presentation, and a conversion-focused customer journey.',
-    services: ['WEB DEVELOPMENT', 'DIGITAL EXPERIENCE', 'UI/UX', 'FRONTEND ARCHITECTURE'],
-    status: 'LIVE',
+    overview: 'An exploration in high-converting specialty coffee websites with interactive flavor notes, origin maps, and recurring subscription checkout.',
+    services: ['DIGITAL STOREFRONT', 'SUBSCRIPTION UI', 'BRAND SYSTEM', 'UI/UX'],
+    status: 'WEBSITE CONCEPT',
+    type: 'concept',
+    urlVerified: true,
     link: 'https://blazebyte-cafe.vercel.app/'
+  },
+  {
+    id: '08',
+    title: 'BLAZEBYTE REALTY',
+    category: 'Real Estate Digital Experience',
+    location: 'Concept Lab',
+    tags: ['Real Estate', 'Web Platform', '3D Architecture'],
+    description: 'An immersive luxury property exploration web platform utilizing architectural rendering previews and smart inquiry management.',
+    image: '/proj_ai.png',
+    overview: 'A digital solution engineered for high-end real estate developments. Features interactive floor plan exploration and property agent routing.',
+    services: ['REAL ESTATE PLATFORM', 'PROPERTY SHOWCASE', 'INQUIRY PIPELINE', 'UI/UX'],
+    status: 'DIGITAL EXPERIENCE CONCEPT',
+    type: 'concept',
+    urlVerified: true,
+    link: 'https://blazebyte-realty.vercel.app/'
   }
 ];
 
-// Interactive Featured Card
-const InteractiveFeaturedCard = ({ project, isMobile }) => {
-  const [isHovered, setIsHovered] = useState(false);
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-
-  const mouseXSpring = useSpring(x, { stiffness: 150, damping: 20 });
-  const mouseYSpring = useSpring(y, { stiffness: 150, damping: 20 });
-
-  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["3deg", "-3deg"]);
-  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-3deg", "3deg"]);
-
-  const handleMouseMove = (e) => {
-    if (isMobile) return;
-    const rect = e.currentTarget.getBoundingClientRect();
-    const mouseX = (e.clientX - rect.left) / rect.width - 0.5;
-    const mouseY = (e.clientY - rect.top) / rect.height - 0.5;
-    x.set(mouseX);
-    y.set(mouseY);
-  };
-
-  const handleMouseLeave = () => {
-    if (isMobile) return;
-    setIsHovered(false);
-    x.set(0);
-    y.set(0);
-  };
-
-  return (
-    <motion.div 
-      className="featured-project-module interactive-wrapper"
-      initial={{ opacity: 0, y: isMobile ? 12 : 40, scale: isMobile ? 1 : 0.95, filter: isMobile ? 'blur(3px)' : 'blur(10px)' }}
-      whileInView={{ opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' }}
-      viewport={{ once: true, margin: isMobile ? "0px" : "-50px" }}
-      transition={{ duration: isMobile ? 0.35 : 0.8, ease: "easeOut" }}
-      style={{ rotateX: isMobile ? 0 : rotateX, rotateY: isMobile ? 0 : rotateY, transformStyle: "preserve-3d" }}
-      onMouseMove={handleMouseMove}
-      onMouseEnter={() => !isMobile && setIsHovered(true)}
-      onMouseLeave={handleMouseLeave}
-      whileTap={isMobile ? { scale: 0.98 } : {}}
-    >
-      <div className={`scan-line ${isHovered ? 'active' : ''}`}></div>
-      
-      <div className="transmission-label" style={{ transform: isMobile ? 'none' : 'translateZ(20px)' }}>FEATURED TRANSMISSION // 001</div>
-      
-      <div className="featured-content-wrapper" style={{ transform: isMobile ? 'none' : 'translateZ(30px)' }}>
-        <div className="featured-image-container">
-          <img src={project.image} alt={project.title} className="featured-image" loading="lazy" />
-          <div className="glass-overlay glow-edge"></div>
-        </div>
-        
-        <div className="featured-metadata" style={{ transform: isMobile ? 'none' : 'translateZ(40px)' }}>
-          <div className="project-category">
-            {project.icon} 
-            <span>01 // {project.category}</span>
-          </div>
-          <h3 className="project-title">{project.title}</h3>
-          <p className="project-description" style={{ color: 'var(--text-secondary)', marginBottom: '24px', fontSize: '0.95rem', lineHeight: '1.6' }}>{project.description}</p>
-          <div className="project-tags">
-            {project.tags.map((tag, idx) => (
-              <span key={idx} className="tag">{tag}</span>
-            ))}
-          </div>
-          <a href={project.link} target="_blank" rel="noopener noreferrer" className="btn-primary mt-4" style={{ textDecoration: 'none', display: 'inline-flex' }}>
-            VIEW PROJECT →
-          </a>
-        </div>
-      </div>
-    </motion.div>
-  );
-};
-
-// Interactive Archive Card
-const InteractiveArchiveCard = ({ project, index, yTransform, onSelect, isMobile }) => {
-  const [isHovered, setIsHovered] = useState(false);
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-
-  const mouseXSpring = useSpring(x, { stiffness: 150, damping: 20 });
-  const mouseYSpring = useSpring(y, { stiffness: 150, damping: 20 });
-
-  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["5deg", "-5deg"]);
-  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-5deg", "5deg"]);
-
-  const handleMouseMove = (e) => {
-    if (isMobile) return;
-    const rect = e.currentTarget.getBoundingClientRect();
-    const mouseX = (e.clientX - rect.left) / rect.width - 0.5;
-    const mouseY = (e.clientY - rect.top) / rect.height - 0.5;
-    x.set(mouseX);
-    y.set(mouseY);
-  };
-
-  const handleMouseLeave = () => {
-    if (isMobile) return;
-    setIsHovered(false);
-    x.set(0);
-    y.set(0);
-  };
-
-  return (
-    <motion.div 
-      className={`archive-module-wrapper ${index % 2 === 0 ? 'offset-down' : ''}`}
-      style={isMobile ? {} : { y: yTransform }}
-      initial={{ opacity: 0, scale: isMobile ? 1 : 0.9, filter: isMobile ? 'blur(3px)' : 'blur(10px)', y: isMobile ? 12 : 0 }}
-      whileInView={{ opacity: 1, scale: 1, filter: 'blur(0px)', y: 0 }}
-      viewport={{ once: true, margin: isMobile ? "0px" : "-100px" }}
-      transition={{ duration: isMobile ? 0.35 : 0.8, delay: isMobile ? 0 : index * 0.1, ease: "easeOut" }}
-    >
-      <motion.div
-        className="archive-module interactive-wrapper clickable"
-        style={{ rotateX: isMobile ? 0 : rotateX, rotateY: isMobile ? 0 : rotateY, transformStyle: "preserve-3d" }}
-        onMouseMove={handleMouseMove}
-        onMouseEnter={() => !isMobile && setIsHovered(true)}
-        onMouseLeave={handleMouseLeave}
-        onClick={() => onSelect(project)}
-        whileHover={!isMobile ? "hover" : ""}
-        whileTap={{ scale: 0.97 }}
-      >
-        <div className={`scan-line ${isHovered ? 'active' : ''}`}></div>
-        
-        <div className="archive-image-container" style={{ transform: isMobile ? 'none' : 'translateZ(20px)' }}>
-          <motion.img 
-            src={project.image} 
-            alt={project.title} 
-            className="archive-image zoom-fx"
-            loading="lazy"
-          />
-          <div className="archive-glass-overlay glow-edge"></div>
-          
-          {!isMobile && (
-            <motion.div 
-              className="archive-hover-meta"
-              variants={{
-                hover: { opacity: 1, y: 0 }
-              }}
-              initial={{ opacity: 0, y: 15 }}
-              transition={{ duration: 0.3 }}
-              style={{ transform: 'translateZ(30px)' }}
-            >
-              <button className="btn-icon">
-                <ArrowRight size={20} />
-              </button>
-            </motion.div>
-          )}
-        </div>
-        
-        <div className="archive-metadata" style={{ transform: isMobile ? 'none' : 'translateZ(30px)' }}>
-          <div className="project-category">
-            <span>0{project.id} // {project.category}</span>
-          </div>
-          <h4 className="project-title-small">{project.title}</h4>
-          <div className="project-tags-compact">
-            {project.tags.join(' • ')}
-          </div>
-        </div>
-      </motion.div>
-    </motion.div>
-  );
-};
-
-// Cinematic Project Modal Component
-const ProjectModal = ({ project, onClose, isMobile }) => {
-  useEffect(() => {
-    const handleEsc = (e) => {
-      if (e.key === 'Escape') onClose();
-    };
-    window.addEventListener('keydown', handleEsc);
-    return () => window.removeEventListener('keydown', handleEsc);
-  }, [onClose]);
-
-  if (!project) return null;
-
-  // Staggered variants for fast mobile rendering
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { 
-        staggerChildren: 0.04,
-        delayChildren: 0.1
-      }
-    },
-    exit: { opacity: 0, transition: { duration: 0.2 } }
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 12, filter: isMobile ? 'blur(0px)' : 'blur(4px)' },
-    visible: { opacity: 1, y: 0, filter: 'blur(0px)', transition: { duration: 0.35, ease: "easeOut" } }
-  };
-
-  return (
-    <motion.div 
-      className="project-modal-backdrop"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.3 }}
-      onClick={onClose}
-    >
-      <motion.div 
-        className="project-modal-content glass-panel"
-        initial={{ opacity: 0, scale: isMobile ? 1 : 0.95, y: isMobile ? 20 : 20 }}
-        animate={{ opacity: 1, scale: 1, y: 0 }}
-        exit={{ opacity: 0, scale: 0.95, y: 20 }}
-        transition={{ duration: 0.4, type: "spring", bounce: 0.2 }}
-        onClick={(e) => e.stopPropagation()} 
-      >
-        <button className="modal-close-btn" onClick={onClose}>
-          <X size={16} /> CLOSE TRANSMISSION
-        </button>
-
-        <motion.div 
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-          exit="exit"
-          className="modal-stagger-wrapper"
-        >
-          <motion.div variants={itemVariants} className="modal-header">
-            <div className="modal-transmission-id">PROJECT TRANSMISSION // 0{project.id}</div>
-            <div className="modal-status">
-              <span className={`status-dot ${project.status === 'LIVE' ? 'green' : project.status === 'CONCEPT' ? 'blue' : 'orange'}`}></span> 
-              STATUS: {project.status}
-            </div>
-          </motion.div>
-
-          <motion.div variants={itemVariants} className="modal-hero">
-            <img src={project.image} alt={project.title} className="modal-image" />
-            <div className="modal-hero-overlay"></div>
-          </motion.div>
-
-          <div className="modal-body">
-            <motion.div variants={itemVariants} className="modal-title-area">
-              <h4 className="modal-category">{project.category}</h4>
-              <h2 className="modal-title">{project.title}</h2>
-            </motion.div>
-
-            <div className="modal-grid">
-              <motion.div variants={itemVariants} className="modal-col modal-col-main">
-                <h3 className="modal-subheading">PROJECT OVERVIEW</h3>
-                <p className="modal-overview-text">{project.overview}</p>
-              </motion.div>
-              
-              <div className="modal-col modal-col-side">
-                <motion.div variants={itemVariants}>
-                  <h3 className="modal-subheading">WHAT WE BUILT</h3>
-                  <ul className="modal-services-list">
-                    {project.services.map((service, idx) => (
-                      <motion.li key={idx} variants={itemVariants}>
-                        <ArrowRight size={14} className="list-icon" /> {service}
-                      </motion.li>
-                    ))}
-                  </ul>
-                </motion.div>
-
-                <motion.div variants={itemVariants}>
-                  <h3 className="modal-subheading mt-6">TECH / CAPABILITIES</h3>
-                  <div className="project-tags modal-tags">
-                    {project.tags.map((tag, idx) => (
-                      <motion.span key={idx} variants={itemVariants} className="tag">{tag}</motion.span>
-                    ))}
-                  </div>
-                </motion.div>
-              </div>
-            </div>
-
-            {project.link && (
-              <motion.div variants={itemVariants} className="modal-footer">
-                <a href={project.link} target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ textDecoration: 'none' }}>
-                  VIEW PROJECT →
-                </a>
-              </motion.div>
-            )}
-          </div>
-        </motion.div>
-      </motion.div>
-    </motion.div>
-  );
-};
-
 const Portfolio = () => {
   const [selectedProject, setSelectedProject] = useState(null);
-  const [isMobile, setIsMobile] = useState(false);
-  const { scrollYProgress } = useScroll();
-  
-  // Parallax speeds for asymmetric grid
-  const ySpeed1 = useTransform(scrollYProgress, [0, 1], [0, -80]);
-  const ySpeed2 = useTransform(scrollYProgress, [0, 1], [0, -150]);
-  const ySpeed3 = useTransform(scrollYProgress, [0, 1], [0, -40]);
 
+  // Keyboard Escape Listener for Modal
   useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth <= 768);
-    handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape' && selectedProject) {
+        setSelectedProject(null);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [selectedProject]);
 
-  // Handle Body Scroll Lock
+  // Handle Scroll Lock when Modal is Open
   useEffect(() => {
     if (selectedProject) {
-      const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
       document.body.style.overflow = 'hidden';
-      document.body.style.paddingRight = `${scrollbarWidth}px`; 
     } else {
       document.body.style.overflow = '';
-      document.body.style.paddingRight = '';
     }
-    
     return () => {
       document.body.style.overflow = '';
-      document.body.style.paddingRight = '';
     };
   }, [selectedProject]);
 
   return (
-    <section className="portfolio-section" id="portfolio">
-      <div className="container portfolio-container">
-        
+    <section className="portfolio-section section-padding" id="portfolio">
+      <div className="container">
         {/* Section Header */}
         <div className="portfolio-header">
-          <motion.div 
-            className="section-badge"
-            initial={{ opacity: 0, y: isMobile ? 12 : 20, filter: isMobile ? 'blur(3px)' : 'blur(5px)' }}
-            whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-            viewport={{ once: true }}
-            transition={{ duration: isMobile ? 0.35 : 0.6, ease: "easeOut" }}
-          >
-            <span className="status-dot-small"></span> BLAZEBYTE // DIGITAL ARCHIVES
-          </motion.div>
-          <motion.h2 
-            className="section-title"
-            initial={{ opacity: 0, y: isMobile ? 12 : 20, filter: isMobile ? 'blur(3px)' : 'blur(8px)' }}
-            whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-            viewport={{ once: true }}
-            transition={{ delay: isMobile ? 0 : 0.1, duration: isMobile ? 0.35 : 0.6, ease: "easeOut" }}
-          >
-            SELECTED WORK <span className="title-accent">// PROJECT ARCHIVE</span>
-          </motion.h2>
+          <div className="section-badge">
+            <span className="section-badge-dot"></span> BLAZEBYTE STUDIO // PORTFOLIO
+          </div>
+          <h2 className="section-title">SELECTED WORK</h2>
+          <p className="section-subtitle">
+            A selection of digital experiences, websites and technology projects developed by BlazeByte Studio.
+          </p>
         </div>
 
-        {/* FEATURED TRANSMISSION (Project 1) */}
-        <div className="featured-transmission">
-          <InteractiveFeaturedCard project={projects[0]} isMobile={isMobile} />
-        </div>
+        {/* Editorial Project Grid */}
+        <div className="portfolio-grid">
+          {projects.map((project, index) => (
+            <motion.div
+              key={project.id}
+              className="project-card"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-50px' }}
+              transition={{ duration: 0.5, delay: index * 0.08 }}
+              onClick={() => setSelectedProject(project)}
+            >
+              {/* Image Preview Container */}
+              <div className="project-image-wrapper">
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  className="project-image"
+                  loading="lazy"
+                />
+                <div className="project-overlay"></div>
+                <div className="project-num-badge">{project.id}</div>
+              </div>
 
-        {/* ASYMMETRIC FLOATING GRID (Projects 2-6) */}
-        <div className="archive-grid">
-          {projects.slice(1).map((project, index) => {
-            const yTransform = index % 3 === 0 ? ySpeed1 : index % 3 === 1 ? ySpeed2 : ySpeed3;
-            return (
-              <InteractiveArchiveCard 
-                key={project.id} 
-                project={project} 
-                index={index} 
-                yTransform={yTransform} 
-                onSelect={setSelectedProject} 
-                isMobile={isMobile}
-              />
-            );
-          })}
-        </div>
+              {/* Project Meta */}
+              <div className="project-info">
+                <div className="project-meta-top">
+                  <span className="project-category">{project.category}</span>
+                  {project.location && (
+                    <span className="project-location">
+                      <Globe size={12} /> {project.location}
+                    </span>
+                  )}
+                </div>
 
+                <h3 className="project-title">{project.title}</h3>
+                <p className="project-desc">{project.description}</p>
+
+                <div className="project-tags-row">
+                  {project.tags.map((tag, i) => (
+                    <span key={i} className="tag">{tag}</span>
+                  ))}
+                </div>
+
+                <div className="project-cta-row">
+                  <button className="btn-case-study">
+                    {project.type === 'live' && project.urlVerified && 'VIEW LIVE PROJECT →'}
+                    {project.type === 'concept' && project.urlVerified && 'EXPLORE CONCEPT →'}
+                    {project.type === 'internal' && 'VIEW PRODUCT →'}
+                    {(project.type === 'case-study' || !project.urlVerified) && 'VIEW CASE STUDY →'}
+                    <ArrowRight size={16} className="arrow-icon" />
+                  </button>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
       </div>
 
-      {/* Project Modal Overlay */}
+      {/* Editorial Case Study Modal */}
       <AnimatePresence>
         {selectedProject && (
-          <ProjectModal 
-            project={selectedProject} 
-            onClose={() => setSelectedProject(null)} 
-            isMobile={isMobile}
-          />
+          <motion.div
+            className="modal-backdrop"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setSelectedProject(null)}
+          >
+            <motion.div
+              className="modal-card"
+              initial={{ opacity: 0, scale: 0.96, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.96, y: 20 }}
+              transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button
+                className="modal-close-btn"
+                onClick={() => setSelectedProject(null)}
+                aria-label="Close Case Study Modal"
+              >
+                <X size={20} /> CLOSE
+              </button>
+
+              <div className="modal-header">
+                <span className="modal-num">PROJECT // {selectedProject.id}</span>
+                <span className="modal-status">{selectedProject.status}</span>
+              </div>
+
+              <div className="modal-hero-image">
+                <img src={selectedProject.image} alt={selectedProject.title} />
+              </div>
+
+              <div className="modal-content">
+                <div className="modal-title-row">
+                  <div>
+                    <span className="modal-cat">{selectedProject.category}</span>
+                    <h2 className="modal-title">{selectedProject.title}</h2>
+                  </div>
+
+                  {/* Dynamic CTA Button Logic */}
+                  {selectedProject.type === 'live' && selectedProject.urlVerified && selectedProject.link && (
+                    <a
+                      href={selectedProject.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn-primary modal-live-btn"
+                    >
+                      VIEW LIVE PROJECT <ExternalLink size={16} />
+                    </a>
+                  )}
+
+                  {selectedProject.type === 'concept' && selectedProject.urlVerified && selectedProject.link && (
+                    <a
+                      href={selectedProject.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn-primary modal-live-btn"
+                    >
+                      EXPLORE CONCEPT <ExternalLink size={16} />
+                    </a>
+                  )}
+
+                  {selectedProject.type === 'internal' && selectedProject.link && (
+                    <a
+                      href={selectedProject.link}
+                      className="btn-primary modal-live-btn"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setSelectedProject(null);
+                        const target = document.querySelector(selectedProject.link);
+                        if (target) {
+                          target.scrollIntoView({ behavior: 'smooth' });
+                        }
+                      }}
+                    >
+                      VIEW PRODUCT <ArrowRight size={16} />
+                    </a>
+                  )}
+
+                  {(selectedProject.type === 'case-study' || !selectedProject.urlVerified) && (
+                    <button
+                      className="btn-secondary modal-live-btn"
+                      onClick={() => setSelectedProject(null)}
+                    >
+                      CLOSE CASE STUDY
+                    </button>
+                  )}
+                </div>
+
+                <div className="modal-grid">
+                  <div className="modal-col">
+                    <h4>OVERVIEW</h4>
+                    <p>{selectedProject.overview}</p>
+                  </div>
+
+                  <div className="modal-col">
+                    <h4>CAPABILITIES DELIVERED</h4>
+                    <ul className="modal-services-list">
+                      {selectedProject.services.map((srv, idx) => (
+                        <li key={idx}>
+                          <span className="list-dot"></span> {srv}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+
+                <div className="modal-tags-section">
+                  <h4>TAGS & STACK</h4>
+                  <div className="modal-tags-row">
+                    {selectedProject.tags.map((t, idx) => (
+                      <span key={idx} className="tag">{t}</span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
         )}
       </AnimatePresence>
-      
     </section>
   );
 };

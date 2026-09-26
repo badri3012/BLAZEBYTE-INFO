@@ -1,0 +1,54 @@
+.whyus-section {
+  background-color: var(--bg-primary);
+  border-top: 1px solid var(--border-color);
+}
+
+.whyus-header {
+  margin-bottom: 3.5rem;
+}
+
+.principles-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+@media (max-width: 1024px) {
+  .principles-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .principles-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.principle-card {
+  display: flex;
+  flex-direction: column;
+  padding: 2.25rem;
+}
+
+.p-num {
+  font-family: var(--font-mono);
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--accent-primary);
+  margin-bottom: 1.25rem;
+}
+
+.p-title {
+  font-size: 1.2rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  margin-bottom: 0.75rem;
+  color: var(--text-primary);
+}
+
+.p-desc {
+  font-size: 0.925rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
