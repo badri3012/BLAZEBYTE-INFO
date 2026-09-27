@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight, ExternalLink, X, Globe } from 'lucide-react';
+import { useRouter } from '../../router/Router';
 import './Portfolio.css';
 
 const projects = [
@@ -8,6 +9,7 @@ const projects = [
     id: '01',
     title: 'ANDY FOODS GH',
     category: 'Digital Experience',
+    filterCategory: 'DIGITAL EXPERIENCES',
     location: 'Ghana',
     tags: ['E-Commerce', 'Brand Experience', 'UI/UX'],
     description: 'A modern African food distribution and digital experience platform designed to showcase Ghanaian food heritage and streamline order inquiries.',
@@ -23,6 +25,7 @@ const projects = [
     id: '02',
     title: 'VITAGOLD KITCHEN',
     category: 'Hospitality Digital Experience',
+    filterCategory: 'HOSPITALITY',
     location: 'West Africa',
     tags: ['Hospitality', 'Web Experience', 'Menu System'],
     description: 'A modern dining digital showcase built with elegant visual presentation, interactive menu systems, and seamless reservation booking.',
@@ -38,6 +41,7 @@ const projects = [
     id: '03',
     title: 'THE CATFISH GRILL',
     category: 'Restaurant Digital Experience',
+    filterCategory: 'HOSPITALITY',
     location: 'Ghana',
     tags: ['Restaurant', 'Brand Experience', 'UI/UX'],
     description: 'A vibrant grill and restaurant web platform crafted to showcase specialized seafood dining, location details, and order channels.',
@@ -53,6 +57,7 @@ const projects = [
     id: '04',
     title: 'JIKONI',
     category: 'Restaurant Experience',
+    filterCategory: 'HOSPITALITY',
     location: 'Uganda',
     tags: ['Hospitality', 'Digital Experience', 'UI/UX'],
     description: 'An East African culinary web platform combining traditional hospitality storytelling with modern digital reservation and menu systems.',
@@ -68,6 +73,7 @@ const projects = [
     id: '05',
     title: 'JE ME RÉGALE',
     category: 'French-Fusion / Private Dining',
+    filterCategory: 'HOSPITALITY',
     location: 'Ghana',
     tags: ['Private Dining', 'Editorial Experience', 'UI/UX'],
     description: 'A high-end French-fusion private dining digital experience featuring curated multi-course menus and VIP event booking.',
@@ -83,6 +89,7 @@ const projects = [
     id: '06',
     title: 'BLAZEBYTE HUB',
     category: 'Internal Digital Product',
+    filterCategory: 'PRODUCT & SYSTEMS',
     location: 'Studio Core',
     tags: ['Digital Product', 'SaaS Dashboard', 'React/Next.js'],
     description: 'Our internal operations and project management dashboard engineered to orchestrate client workflows, sprint deliverables, and team skills.',
@@ -92,12 +99,13 @@ const projects = [
     status: 'INTERNAL DIGITAL PRODUCT',
     type: 'internal',
     urlVerified: true,
-    link: '#hub'
+    link: '/studio'
   },
   {
     id: '07',
     title: 'BLAZEBYTE CAFE',
     category: 'Digital Experience Concept',
+    filterCategory: 'CONCEPTS',
     location: 'Concept Lab',
     tags: ['Cafe & Roastery', 'E-Commerce', 'UI/UX'],
     description: 'A concept web experience designed for modern specialty coffee roasteries, combining artisanal storytelling and coffee subscription ordering.',
@@ -113,6 +121,7 @@ const projects = [
     id: '08',
     title: 'BLAZEBYTE REALTY',
     category: 'Real Estate Digital Experience',
+    filterCategory: 'CONCEPTS',
     location: 'Concept Lab',
     tags: ['Real Estate', 'Web Platform', '3D Architecture'],
     description: 'An immersive luxury property exploration web platform utilizing architectural rendering previews and smart inquiry management.',
@@ -126,8 +135,12 @@ const projects = [
   }
 ];
 
-const Portfolio = () => {
+const categories = ['ALL', 'DIGITAL EXPERIENCES', 'HOSPITALITY', 'PRODUCT & SYSTEMS', 'CONCEPTS'];
+
+const Portfolio = ({ preview = false }) => {
+  const { navigate } = useRouter();
   const [selectedProject, setSelectedProject] = useState(null);
+  const [activeCategory, setActiveCategory] = useState('ALL');
 
   // Keyboard Escape Listener for Modal
   useEffect(() => {
@@ -152,6 +165,12 @@ const Portfolio = () => {
     };
   }, [selectedProject]);
 
+  const displayedProjects = preview
+    ? projects.filter((p) => ['01', '03', '06'].includes(p.id))
+    : activeCategory === 'ALL'
+    ? projects
+    : projects.filter((p) => p.filterCategory === activeCategory);
+
   return (
     <section className="portfolio-section section-padding" id="portfolio">
       <div className="container">
@@ -160,15 +179,32 @@ const Portfolio = () => {
           <div className="section-badge">
             <span className="section-badge-dot"></span> BLAZEBYTE STUDIO // PORTFOLIO
           </div>
-          <h2 className="section-title">SELECTED WORK</h2>
+          <h2 className="section-title">
+            {preview ? 'SELECTED WORK PREVIEW' : 'SELECTED WORK'}
+          </h2>
           <p className="section-subtitle">
             A selection of digital experiences, websites and technology projects developed by BlazeByte Studio.
           </p>
         </div>
 
+        {/* Category Filter Bar (Full View Only) */}
+        {!preview && (
+          <div className="portfolio-filter-bar">
+            {categories.map((cat) => (
+              <button
+                key={cat}
+                className={`filter-btn ${activeCategory === cat ? 'active' : ''}`}
+                onClick={() => setActiveCategory(cat)}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
+        )}
+
         {/* Editorial Project Grid */}
         <div className="portfolio-grid">
-          {projects.map((project, index) => (
+          {displayedProjects.map((project, index) => (
             <motion.div
               key={project.id}
               className="project-card"
@@ -223,6 +259,18 @@ const Portfolio = () => {
             </motion.div>
           ))}
         </div>
+
+        {/* Preview Mode Footer Link */}
+        {preview && (
+          <div className="portfolio-preview-footer">
+            <button
+              className="btn-primary"
+              onClick={() => navigate('/work')}
+            >
+              EXPLORE ALL WORK <ArrowRight size={18} />
+            </button>
+          </div>
+        )}
       </div>
 
       {/* Editorial Case Study Modal */}
@@ -297,10 +345,7 @@ const Portfolio = () => {
                       onClick={(e) => {
                         e.preventDefault();
                         setSelectedProject(null);
-                        const target = document.querySelector(selectedProject.link);
-                        if (target) {
-                          target.scrollIntoView({ behavior: 'smooth' });
-                        }
+                        navigate('/studio');
                       }}
                     >
                       VIEW PRODUCT <ArrowRight size={16} />

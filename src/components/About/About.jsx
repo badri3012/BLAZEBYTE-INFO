@@ -1,9 +1,12 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Building2, User, Award, ShieldCheck, MapPin } from 'lucide-react';
+import { Building2, User, Award, ShieldCheck, MapPin, ArrowRight } from 'lucide-react';
+import { useRouter } from '../../router/Router';
 import './About.css';
 
-const About = () => {
+const About = ({ preview = false }) => {
+  const { navigate } = useRouter();
+
   return (
     <section className="about-section section-padding" id="about">
       <div className="container">
@@ -45,6 +48,17 @@ const About = () => {
                 </div>
               </div>
             </div>
+
+            {preview && (
+              <div className="about-preview-cta" style={{ marginTop: '2rem' }}>
+                <button
+                  className="btn-primary"
+                  onClick={() => navigate('/studio')}
+                >
+                  ABOUT THE STUDIO <ArrowRight size={18} />
+                </button>
+              </div>
+            )}
           </motion.div>
 
           {/* Right Column: Verified Business Information Card */}

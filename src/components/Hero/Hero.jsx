@@ -1,16 +1,16 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, ArrowUpRight } from 'lucide-react';
+import { useRouter } from '../../router/Router';
 import GenerativeVisual from './GenerativeVisual';
 import './Hero.css';
 
 const Hero = () => {
-  const handleSmoothScroll = (e, href) => {
+  const { navigate } = useRouter();
+
+  const handleNav = (e, href) => {
     e.preventDefault();
-    const target = document.querySelector(href);
-    if (target) {
-      target.scrollIntoView({ behavior: 'smooth' });
-    }
+    navigate(href);
   };
 
   return (
@@ -41,16 +41,16 @@ const Hero = () => {
 
           <div className="hero-actions">
             <a
-              href="#portfolio"
+              href="/work"
               className="btn-primary"
-              onClick={(e) => handleSmoothScroll(e, '#portfolio')}
+              onClick={(e) => handleNav(e, '/work')}
             >
               EXPLORE OUR WORK <ArrowRight size={18} />
             </a>
             <a
-              href="#contact"
+              href="/contact"
               className="btn-secondary"
-              onClick={(e) => handleSmoothScroll(e, '#contact')}
+              onClick={(e) => handleNav(e, '/contact')}
             >
               START A PROJECT <ArrowUpRight size={18} />
             </a>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Layout, Cpu, TrendingUp, Bot } from 'lucide-react';
+import { Layout, Cpu, TrendingUp, Bot, ArrowRight } from 'lucide-react';
+import { useRouter } from '../../router/Router';
 import './Services.css';
 
 const capabilities = [
@@ -38,7 +39,9 @@ const capabilities = [
   }
 ];
 
-const Services = () => {
+const Services = ({ preview = false }) => {
+  const { navigate } = useRouter();
+
   return (
     <section className="services-section section-padding" id="services">
       <div className="container">
@@ -84,6 +87,18 @@ const Services = () => {
             </motion.div>
           ))}
         </div>
+
+        {/* Preview Footer CTA */}
+        {preview && (
+          <div className="services-preview-footer" style={{ marginTop: '3rem', display: 'flex', justifyContent: 'center' }}>
+            <button
+              className="btn-primary"
+              onClick={() => navigate('/capabilities')}
+            >
+              VIEW ALL CAPABILITIES <ArrowRight size={18} />
+            </button>
+          </div>
+        )}
       </div>
     </section>
   );

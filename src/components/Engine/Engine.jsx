@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Search, Target, LayoutGrid, Terminal, ShieldCheck, ArrowUpRight } from 'lucide-react';
+import { Search, Target, LayoutGrid, Terminal, ShieldCheck, ArrowUpRight, ArrowRight } from 'lucide-react';
+import { useRouter } from '../../router/Router';
 import './Engine.css';
 
 const steps = [
@@ -42,7 +43,10 @@ const steps = [
   },
 ];
 
-const Engine = () => {
+const Engine = ({ preview = false }) => {
+  const { navigate } = useRouter();
+  const displayedSteps = preview ? steps.slice(0, 4) : steps;
+
   return (
     <section className="engine-section section-padding" id="engine">
       <div className="container">
@@ -62,7 +66,7 @@ const Engine = () => {
           <div className="engine-connecting-line"></div>
 
           <div className="engine-steps-grid">
-            {steps.map((step, idx) => (
+            {displayedSteps.map((step, idx) => (
               <motion.div
                 key={step.num}
                 className="engine-step-card editorial-card"
@@ -83,6 +87,18 @@ const Engine = () => {
             ))}
           </div>
         </div>
+
+        {/* Preview Footer CTA */}
+        {preview && (
+          <div className="engine-preview-footer" style={{ marginTop: '3.5rem', display: 'flex', justifyContent: 'center' }}>
+            <button
+              className="btn-primary"
+              onClick={() => navigate('/process')}
+            >
+              EXPLORE OUR PROCESS <ArrowRight size={18} />
+            </button>
+          </div>
+        )}
       </div>
     </section>
   );

@@ -1,19 +1,71 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { RouterProvider, useRouter } from './router/Router';
 import Preloader from './components/Preloader/Preloader';
 import ParticleBackground from './components/Background/ParticleBackground';
 import Navbar from './components/Layout/Navbar';
-import Hero from './components/Hero/Hero';
-import Portfolio from './components/Portfolio/Portfolio';
-import Services from './components/Services/Services';
-import Engine from './components/Engine/Engine';
-import BlazeByteHub from './components/BlazeByteHub/BlazeByteHub';
-import WhyUs from './components/WhyUs/WhyUs';
-import About from './components/About/About';
-import Team from './components/Team/Team';
-import TechStack from './components/TechStack/TechStack';
-import Contact from './components/Contact/Contact';
 import Footer from './components/Layout/Footer';
+import PageTransition from './components/Layout/PageTransition';
+
+import Home from './pages/Home';
+import WorkPage from './pages/WorkPage';
+import CapabilitiesPage from './pages/CapabilitiesPage';
+import StudioPage from './pages/StudioPage';
+import ProcessPage from './pages/ProcessPage';
+import ContactPage from './pages/ContactPage';
+
+const titleMap = {
+  '/': 'BlazeByte Studio — Digital Experiences • Technology • Growth',
+  '/work': 'Work & Selected Projects — BlazeByte Studio',
+  '/capabilities': 'Capabilities & Technical Architecture — BlazeByte Studio',
+  '/studio': 'Studio, Team & Registered Enterprise — BlazeByte Studio',
+  '/process': 'The BlazeByte Engine Methodology — BlazeByte Studio',
+  '/contact': 'Start a Project & Contact — BlazeByte Studio',
+};
+
+function MainContent() {
+  const { currentPath } = useRouter();
+
+  // Dynamic document title update
+  useEffect(() => {
+    const matchedTitle = titleMap[currentPath] || 'BlazeByte Studio — Digital Experiences • Technology • Growth';
+    document.title = matchedTitle;
+  }, [currentPath]);
+
+  const renderPage = () => {
+    switch (currentPath) {
+      case '/':
+        return <Home />;
+      case '/work':
+        return <WorkPage />;
+      case '/capabilities':
+        return <CapabilitiesPage />;
+      case '/studio':
+        return <StudioPage />;
+      case '/process':
+        return <ProcessPage />;
+      case '/contact':
+        return <ContactPage />;
+      default:
+        return <Home />;
+    }
+  };
+
+  return (
+    <div style={{ position: 'relative', zIndex: 1 }}>
+      <ParticleBackground />
+      <Navbar />
+      <main>
+        <AnimatePresence mode="wait">
+          <PageTransition key={currentPath}>
+            {renderPage()}
+          </PageTransition>
+        </AnimatePresence>
+      </main>
+      <Footer />
+    </div>
+  );
+}
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -28,7 +80,7 @@ function App() {
       document.body.style.overflow = '';
       document.body.style.paddingRight = '';
     }
-    
+
     return () => {
       document.body.style.overflow = '';
       document.body.style.paddingRight = '';
@@ -36,7 +88,7 @@ function App() {
   }, [loading]);
 
   return (
-    <>
+    <RouterProvider>
       <AnimatePresence mode="wait">
         {loading ? (
           <Preloader key="preloader" onComplete={() => setLoading(false)} />
@@ -46,27 +98,12 @@ function App() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            style={{ position: 'relative', zIndex: 1 }}
           >
-            <ParticleBackground />
-            <Navbar />
-            <main>
-              <Hero />
-              <Portfolio />
-              <Services />
-              <Engine />
-              <BlazeByteHub />
-              <WhyUs />
-              <About />
-              <Team />
-              <TechStack />
-              <Contact />
-            </main>
-            <Footer />
+            <MainContent />
           </motion.div>
         )}
       </AnimatePresence>
-    </>
+    </RouterProvider>
   );
 }
 

@@ -1,19 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, ArrowUpRight } from 'lucide-react';
+import { useRouter } from '../../router/Router';
 import './Navbar.css';
 
 const navLinks = [
-  { id: 'portfolio', label: 'Work', href: '#portfolio' },
-  { id: 'services', label: 'Capabilities', href: '#services' },
-  { id: 'about', label: 'Studio', href: '#about' },
-  { id: 'engine', label: 'Process', href: '#engine' },
+  { id: 'work', label: 'Work', href: '/work' },
+  { id: 'capabilities', label: 'Capabilities', href: '/capabilities' },
+  { id: 'studio', label: 'Studio', href: '/studio' },
+  { id: 'process', label: 'Process', href: '/process' },
 ];
 
 const Navbar = () => {
+  const { currentPath, navigate } = useRouter();
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState('hero');
 
   useEffect(() => {
     const handleScroll = () => {
@@ -21,27 +22,6 @@ const Navbar = () => {
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  useEffect(() => {
-    const sections = ['hero', 'portfolio', 'services', 'about', 'engine', 'contact'];
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries.filter((e) => e.isIntersecting);
-        if (visible.length > 0) {
-          visible.sort((a, b) => b.intersectionRatio - a.intersectionRatio);
-          setActiveSection(visible[0].target.id);
-        }
-      },
-      { rootMargin: '-20% 0px -50% 0px', threshold: [0.1, 0.5] }
-    );
-
-    sections.forEach((id) => {
-      const el = document.getElementById(id);
-      if (el) observer.observe(el);
-    });
-
-    return () => observer.disconnect();
   }, []);
 
   // Keyboard Escape listener for Mobile Menu
@@ -67,13 +47,15 @@ const Navbar = () => {
     };
   }, [mobileMenuOpen]);
 
-  const handleSmoothScroll = (e, href) => {
+  const handleNavClick = (e, href) => {
     e.preventDefault();
     setMobileMenuOpen(false);
-    const target = document.querySelector(href);
-    if (target) {
-      target.scrollIntoView({ behavior: 'smooth' });
-    }
+    navigate(href);
+  };
+
+  const isLinkActive = (href) => {
+    if (href === '/') return currentPath === '/';
+    return currentPath === href || currentPath.startsWith(href + '/');
   };
 
   return (
@@ -86,7 +68,7 @@ const Navbar = () => {
       >
         <div className="container navbar-container">
           {/* Brand Logo */}
-          <a href="#hero" className="navbar-brand" onClick={(e) => handleSmoothScroll(e, '#hero')}>
+          <a href="/" className="navbar-brand" onClick={(e) => handleNavClick(e, '/')}>
             <span className="brand-title">BLAZEBYTE</span>
             <span className="brand-dot"></span>
             <span className="brand-subtitle">STUDIO</span>
@@ -98,8 +80,8 @@ const Navbar = () => {
               <a
                 key={link.id}
                 href={link.href}
-                className={`nav-link ${activeSection === link.id ? 'active' : ''}`}
-                onClick={(e) => handleSmoothScroll(e, link.href)}
+                className={`nav-link ${isLinkActive(link.href) ? 'active' : ''}`}
+                onClick={(e) => handleNavClick(e, link.href)}
               >
                 {link.label}
               </a>
@@ -109,9 +91,9 @@ const Navbar = () => {
           {/* Right Action */}
           <div className="navbar-actions desktop-only">
             <a
-              href="#contact"
-              className="btn-nav-cta"
-              onClick={(e) => handleSmoothScroll(e, '#contact')}
+              href="/contact"
+              className={`btn-nav-cta ${currentPath === '/contact' ? 'active-cta' : ''}`}
+              onClick={(e) => handleNavClick(e, '/contact')}
             >
               START A PROJECT <ArrowUpRight size={16} />
             </a>
@@ -144,8 +126,8 @@ const Navbar = () => {
                   <a
                     key={link.id}
                     href={link.href}
-                    className={`mobile-nav-link ${activeSection === link.id ? 'active' : ''}`}
-                    onClick={(e) => handleSmoothScroll(e, link.href)}
+                    className={`mobile-nav-link ${isLinkActive(link.href) ? 'active' : ''}`}
+                    onClick={(e) => handleNavClick(e, link.href)}
                   >
                     <span className="mobile-nav-num">0{idx + 1}</span>
                     <span className="mobile-nav-label">{link.label}</span>
@@ -155,9 +137,9 @@ const Navbar = () => {
 
               <div className="mobile-menu-footer">
                 <a
-                  href="#contact"
+                  href="/contact"
                   className="btn-primary mobile-cta-btn"
-                  onClick={(e) => handleSmoothScroll(e, '#contact')}
+                  onClick={(e) => handleNavClick(e, '/contact')}
                 >
                   START A PROJECT <ArrowUpRight size={18} />
                 </a>
